@@ -4,110 +4,139 @@
 
 (function () {
 
-    var core = {
-        components: {
-            prefix: 'dnf-component-'
+    var jex = {
+        classManager: {
+
+        },
+        extend: function (config, target) {
+
+            for (var i in config) {
+                if (target) {
+                    target[i] = config[i];
+                } else {
+                    jex[i] = config[i];
+                }
+            }
         }
     };
-    var extend = function (obj, cfg) {
-        for (var i in cfg) {
-            obj[i] = cfg[i];
+
+
+    //check type  string,function,array,object
+    jex.extend({
+        isFunction: function (o) {
+            return o && Object.prototype.toString.call(o) == '[object Function]';
+        },
+        isString: function (o) {
+            return o && Object.prototype.toString.call(o) == '[object String]';
+        },
+        isArray: function (o) {
+            return o && Object.prototype.toString.call(o) == '[object Array]';
+        },
+        isObject: function (o) {
+            return o && Object.prototype.toString.call(o) == '[object Object]';
         }
-    }
+    })
 
-    extend(core.components, {
+    //util each,merge,
+    jex.extend({
+        each: function (o, fn) {
+            if (jex.isArray(o)) {
+                for (var i = 0, len = o.length; i < len; i++) {
+                    fn(o[i], i);
+                }
+            } else if (jex.isObject(o)) {
+                for (var i in o) {
+                    fn(o[i], i);
+                }
+            }
+        },
+        merge: function (o1, o2) {
+            jex.each(o2, function (key) {
+                o1[key] = this;
+            })
+        }
+    });
 
-        back: '<div class=' + core.components.prefix + 'button-back>{back-text}</div>',
-        titleBar: '<div class=' + core.components.prefix + 'titlebar><div class=' + core.components.prefix + 'titlebar-text>{title-text}</div><div class=' + core.components.prefix + 'titlebar-items>{titlebar-items}</div></div>',
-        tab: '<div class=' + core.components.prefix + 'tab><div class=' + core.components.prefix + 'tab-contents>{tab-contents}</div><div class=' + core.components.prefix + 'tab-bars>{tab-bars}</div></div>'
+
+    //classManager
+    jex.extend({
+        tpl: [],
+        add: function (o) {
+            this.tpl.push(o);
+        },
+        getClass: function (alias) {
+            var fn;
+            jex.each(this.tpl, function (item, i) {
+                if (item.name == alias) {
+                    fn = item.fn;
+                    return;
+                }
+            });
+            return fn;
+        }
+
+    }, jex.classManager);
+
+    //define, create
+    jex.extend({
+        inherit: function (subclass, superclass) {
+            var F = function () {
+                },
+                subclassProto, superclassProto = superclass.prototype;
+
+            F.prototype = superclassProto;
+            subclassProto = subclass.prototype = new F();
+            subclassProto.constructor = subclass;
+            subclass.superclass = superclassProto;
+
+            if (superclassProto.constructor === Object.constructor) {
+                superclassProto.constructor = superclass;
+            }
+            return subclass;
+        },
+        generateFc: function (o) {
+
+            var fn = 'var temp = function ' + o.alias + '(){';
+            var funcArray = [];
+
+            jex.each(o, function (item, key) {
+                if (jex.isFunction(item)) {
+                    funcArray.push({key: key, fn: item});
+                } else if (jex.isString(item)) {
+                    fn += 'this.' + key + '=' + item + ';';
+                } else if (jex.isObject(item)) {
+                    var newPro = 'this.' + key + '= {};';
+                    fn += newPro;
+                    jex.each(item, function (i, k) {
+                        fn += 'this.' + key + '.' + k + '=' + i + ';';
+                    });
+                    fn = fn.replace(newPro, '');
+                }
+            });
+            fn += '}';
+            eval(fn);
+
+            jex.each(funcArray, function (item, index) {
+                temp.prototype[item.key] = item.fn;
+            });
+            return temp;
+        },
+        define: function (name, opt) {
+            var fn = jex.generateFc(opt);
+            jex.classManager.add(fn);
+
+
+        },
+        create: function (options) {
+
+
+        }
+
 
     });
 
-    extend(core, {
-        isArray: function (obj) {
-            return obj && Object.prototype.toString.call(obj) == '[object Array]';
-        }
-    })
 
-    var back = {
-        name: 'back',
-        create: function (cfg) {
-
-            var text = cfg.text,
-                clickFn = cfg.click;
-
-            if (clickFn) {
-
-            }
-            return core.components[this.name].replace('{back-text}', text);
-        }
-    }
-
-    var titleBar = {
-        name: 'titleBar',
-        create: function (cfg) {
-            var text = cfg.text,
-                items = cfg.items
-
-            var html = core.components[this.name].replace('{title-text}', text);
-            var obj = {};
-
-
-            d(items || cfg, obj);
-
-            console.log(obj);
-
-
-            html.replace('{titlebar-items}', obj['item0']);
-            return html;
-        }
-    }
-
-    function d(items, obj, parent) {
-        if (Object.prototype.toString.call(items) == '[object Array]') {
-            items.forEach(function (item) {
-                var component = core[item.alias];
-                if (component) {
-                    var html = component.create(item);
-                    obj['item' + Object.keys(obj).length] = html;
-                }
-                if (item.items) {
-                    d(item.items, obj);
-                }
-
-            })
-        } else {
-            var component = core[items.alias];
-            if (component) {
-                var html = component.create(items);
-                obj['item' + Object.keys(obj).length] = html;
-            }
-        }
-    }
-
-    var tab = {
-        name: 'tab',
-        create: function (obj) {
-            obj.forEach(function (item, i) {
-                var tabText = obj.tabText,
-                    title = obj.title,
-                    contentHtml = obj.content;
-
-
-            })
-
-        }
-
-    };
-
-
-    extend(core, {
-        back: back,
-        titleBar: titleBar,
-        tab: tab
-
-    })
-    window['core'] = core;
+    window['jex'] = jex;
 
 
 }());

@@ -5,21 +5,15 @@
     <script src="tab.js"></script>
 
     <script>
-        var a = core.titleBar.create({
-            text: 'asdasd',
-            items: [
-                {
-                    alias: 'back',
-                    text: 'asdas',
-                    items: [
-                        {
-                            alias: 'titleBar',
-                            text: 'asdasd'
-                        }
-                    ]
-                }
-            ]
-        })
+        jex.define('name', {
+            alias: 'NAMe',
+            o: {
+                asd: '111'
+            },
+            getN: function () {
+                this.name = 'asd';
+            }
+        });
     </script>
 </head>
 <body>
