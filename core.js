@@ -8,8 +8,22 @@
         classManager: {
 
         },
+        html: {
+            dom: [
+                {alias: ''}
+            ],
+            getDom: function (alias) {
+                var dom;
+                jex.each(jex.html.dom, function (item, index) {
+                    if (item.alias == alias) {
+                        dom = item.dom;
+                    }
+                });
+                return dom;
+            }
+        },
+        instances: [],
         extend: function (config, target) {
-
             for (var i in config) {
                 if (target) {
                     target[i] = config[i];
@@ -51,24 +65,35 @@
             }
         },
         merge: function (o1, o2) {
-            jex.each(o2, function (key) {
-                o1[key] = this;
+            jex.each(o2, function (item, key) {
+                o1[key] = item;
             })
+            return o1;
         }
     });
 
 
     //classManager
     jex.extend({
-        tpl: [],
-        add: function (o) {
-            this.tpl.push(o);
+        constructors: [],
+        models: [],
+        addClass: function (fn) {
+            jex.classManager.constructors.push(fn);
         },
-        getClass: function (alias) {
+        addModel: function (tpl) {
+            jex.classManager.models.push(tpl);
+        },
+        getClass: function (alias, isModel) {
             var fn;
-            jex.each(this.tpl, function (item, i) {
-                if (item.name == alias) {
-                    fn = item.fn;
+            var o;
+            if (isModel) {
+                o = jex.classManager.models;
+            } else {
+                o = jex.classManager.constructors;
+            }
+            jex.each(o, function (item, i) {
+                if (item.name || item.alias == alias) {
+                    fn = item;
                     return;
                 }
             });
@@ -103,14 +128,14 @@
                 if (jex.isFunction(item)) {
                     funcArray.push({key: key, fn: item});
                 } else if (jex.isString(item)) {
-                    fn += 'this.' + key + '=' + item + ';';
+                    fn += 'this.' + key + '="' + item + '";';
                 } else if (jex.isObject(item)) {
                     var newPro = 'this.' + key + '= {};';
                     fn += newPro;
                     jex.each(item, function (i, k) {
-                        fn += 'this.' + key + '.' + k + '=' + i + ';';
+                        fn += 'this.' + key + '.' + k + '="' + i + '";';
                     });
-                    fn = fn.replace(newPro, '');
+
                 }
             });
             fn += '}';
@@ -123,20 +148,19 @@
         },
         define: function (name, opt) {
             var fn = jex.generateFc(opt);
-            jex.classManager.add(fn);
 
-
+            opt.element = jex.html.getDom(opt.alias);
+            jex.classManager.addClass(fn);
+            jex.classManager.addModel(opt);
         },
-        create: function (options) {
+        create: function (alias, options) {
+            var model = jex.classManager.getClass(alias, true);
+            var constructor = jex.generateFc(jex.merge(model, options));
+            var instance = new constructor();
+            jex.instances.push(instance);
 
-
+            return instance;
         }
-
-
     });
-
-
     window['jex'] = jex;
-
-
 }());
