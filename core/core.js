@@ -116,11 +116,11 @@
         dom: [
             {
                 alias: 'viewport',
-                dom: '<div class=' + jex.prefix + 'viewport></div>'
+                dom: "<div class='" + jex.prefix + "viewport' id='" + this.alias + "'></div>"
             },
             {
                 alias: 'panel',
-                dom: '<div class=' + jex.prefix + 'panel></div>'
+                dom: "<div class='" + jex.prefix + "panel' id='panel-" + jex.instances.length + "'></div>"
             }
         ],
         getDom: function (alias) {
@@ -168,6 +168,8 @@
                         fn += 'this.' + key + '.' + k + '="' + i + '";';
                     });
 
+                } else if (jex.isArray(item)) {
+                    fn += 'this.' + key + '=' + item + ';';
                 }
             });
             fn += '}';
