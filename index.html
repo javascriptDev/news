@@ -5,6 +5,7 @@
     <script src="core/core.js"></script>
     <script src="core/viewport.js"></script>
     <script src="core/panel.js"></script>
+    <script src="core/titlebar.js"></script>
     <script>
 
         jex.application({
@@ -14,7 +15,12 @@
             stores: [],
             start: function () {
                 var viewport = jex.create('viewport');
-                viewport.add(jex.create('panel'));
+                var panel = jex.create('panel');
+                var title = jex.create('titlebar');
+
+                panel.add(title);
+                viewport.add(panel);
+
 
             }
 

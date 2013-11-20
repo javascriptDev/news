@@ -4,6 +4,7 @@
 jex.define('panel', {
     alias: 'panel',
     extend: 'viewport',
+    type: 'view',
     config: {
         name: 'panel'
     },

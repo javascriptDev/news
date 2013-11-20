@@ -92,23 +92,34 @@
         addModel: function (tpl) {
             jex.classManager.models.push(tpl);
         },
-        getClass: function (alias, isModel) {
+        getClass: function (alias) {
             var fn;
-            var o;
-            if (isModel) {
-                o = jex.classManager.models;
-            } else {
-                o = jex.classManager.constructors;
-            }
-            jex.each(o, function (item, i) {
-                if (item.name || item.alias == alias) {
+            jex.each(jex.classManager.constructors, function (item, i) {
+                if (item.name == alias) {
                     fn = item;
-                    return;
                 }
             });
             return fn;
+        },
+        getModel: function (alias) {
+            var fn;
+            jex.each(jex.classManager.models, function (item, i) {
+                if (item.alias == alias) {
+                    fn = item;
+                }
+            });
+            return fn;
+        },
+        updateModel: function (instance) {
+            var index = 0;
+            jex.each(jex.classManager.models, function (item, i) {
+                if (item.element.id == instance.element.id) {
+                    index = i;
+                    return;
+                }
+            });
+            jex.classManager.models[index] = instance;
         }
-
     }, jex.classManager);
 
     //定义 所有组件的 dom元素，并管理
@@ -116,18 +127,29 @@
         dom: [
             {
                 alias: 'viewport',
-                dom: "<div class='" + jex.prefix + "viewport' id='" + this.alias + "'></div>"
+                dom: function () {
+                    var outer = document.createElement('div');
+                    outer.className = jex.prefix + 'viewport';
+                    outer.id = 'viewport';
+                    return outer;
+
+                }
             },
             {
                 alias: 'panel',
-                dom: "<div class='" + jex.prefix + "panel' id='panel-" + jex.instances.length + "'></div>"
+                dom: function () {
+                    var outer = document.createElement('div');
+                    outer.className = jex.prefix + 'panel';
+                    outer.id = jex.prefix + document.querySelectorAll('.' + jex.prefix + 'panel').length;
+                    return outer;
+                }
             }
         ],
         getDom: function (alias) {
             var dom;
             jex.each(jex.html.dom, function (item, index) {
                 if (item.alias == alias) {
-                    dom = item.dom;
+                    dom = item.dom();
                 }
             });
             return dom;
@@ -139,16 +161,25 @@
         inherit: function (subclass, superclass) {
             var F = function () {
                 },
-                subclassProto, superclassProto = superclass.prototype;
+                subclassProto = subclass.prototype, superclassProto = superclass.prototype;
 
             F.prototype = superclassProto;
-            subclassProto = subclass.prototype = new F();
-            subclassProto.constructor = subclass;
+            subclass.prototype = new F();
+            subclass.prototype.constructor = subclass;
             subclass.superclass = superclassProto;
 
             if (superclassProto.constructor === Object.constructor) {
                 superclassProto.constructor = superclass;
             }
+            var subProtoMethod = Object.keys(subclassProto);
+
+            jex.each(subProtoMethod, function (item) {
+                if (subclassProto.hasOwnProperty(item)) {
+                    if (jex.isFunction(subclassProto[item])) {
+                        subclass.prototype[item] = subclassProto[item];
+                    }
+                }
+            });
             return subclass;
         },
         generateFc: function (o) {
@@ -169,7 +200,7 @@
                     });
 
                 } else if (jex.isArray(item)) {
-                    fn += 'this.' + key + '=' + item + ';';
+                    fn += 'this.' + key + '=' + (item.length == 0 ? "[]" : item) + ';';
                 }
             });
             fn += '}';
@@ -189,28 +220,28 @@
             var fn = jex.generateFc(opt);
 
             //获取父类构造函数
-            var parentClass = (opt.extend == 'undefined' ? null : jex.classManager.getClass(opt.extend));
 
-            //实现继承
-            var subClass = fn;
-            if (parentClass) {
-                subClass = jex.inherit(fn, parentClass);
-            }
 
             //添加到 类管理模块
-            jex.classManager.addClass(subClass);
+            jex.classManager.addClass(fn);
             jex.classManager.addModel(opt);
         },
         create: function (alias, options) {
             //获取model
-            var model = jex.classManager.getClass(alias, true);
+            var model = jex.merge(jex.classManager.getModel(alias), options);
+            var parentClass = (model.extend == 'undefined' ? null : jex.classManager.getClass(model.extend));
 
-            var constructor = jex.generateFc(jex.merge(model, options));
-            var instance = new constructor();
+            //实现继承
+            var subclass = jex.generateFc(model);
+            if (parentClass) {
+                subclass = jex.inherit(subclass, parentClass);
+            }
+
+            var instance = new subclass();
             jex.instances.push(instance);
 
             if (jex.type == 'view') {
-                view.ready();
+                instance.ready();
             }
 
             return instance;
