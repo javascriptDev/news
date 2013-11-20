@@ -5,22 +5,12 @@
 (function () {
 
     var jex = {
+        prefix: 'jex-component-',
         classManager: {
 
         },
         html: {
-            dom: [
-                {alias: ''}
-            ],
-            getDom: function (alias) {
-                var dom;
-                jex.each(jex.html.dom, function (item, index) {
-                    if (item.alias == alias) {
-                        dom = item.dom;
-                    }
-                });
-                return dom;
-            }
+
         },
         instances: [],
         extend: function (config, target) {
@@ -30,6 +20,11 @@
                 } else {
                     jex[i] = config[i];
                 }
+            }
+        },
+        error: {
+            show: function (text) {
+                throw  new Error(text);
             }
         }
     };
@@ -102,6 +97,23 @@
 
     }, jex.classManager);
 
+    //html
+    jex.extend({
+        dom: [
+            {alias: 'viewport', dom: '<div class=' + jex.prefix + 'viewport></div>'},
+            {alias: 'panel', dom: '<div class=' + jex.prefix + 'panel></div>'}
+        ],
+        getDom: function (alias) {
+            var dom;
+            jex.each(jex.html.dom, function (item, index) {
+                if (item.alias == alias) {
+                    dom = item.dom;
+                }
+            });
+            return dom;
+        }}, jex.html);
+
+
     //define, create
     jex.extend({
         inherit: function (subclass, superclass) {
@@ -147,10 +159,18 @@
             return temp;
         },
         define: function (name, opt) {
-            var fn = jex.generateFc(opt);
 
             opt.element = jex.html.getDom(opt.alias);
-            jex.classManager.addClass(fn);
+            var fn = jex.generateFc(opt);
+
+            var parentClass = (opt.extend == 'undefined' ? null : jex.classManager.getClass(opt.extend));
+
+            var subClass = fn;
+            if (parentClass) {
+                subClass = jex.inherit(fn, parentClass);
+            }
+
+            jex.classManager.addClass(subClass);
             jex.classManager.addModel(opt);
         },
         create: function (alias, options) {
