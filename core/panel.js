@@ -7,6 +7,11 @@ jex.define('panel', {
     config: {
         name: 'panel'
     },
+    items: [],
+    ready: function () {
+        var dom = this.element;
+        console.log('panel' + dom);
+    },
     show: function () {
     }
 })

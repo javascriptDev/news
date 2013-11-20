@@ -29,6 +29,20 @@
         }
     };
 
+    //application 入口
+    jex.extend({
+        application: function (config) {
+            var views = config.views,
+                controllers = config.controllers,
+                models = config.models,
+                stores = config.stores;
+
+            config.start();
+
+
+        }
+    });
+
 
     //check type  string,function,array,object
     jex.extend({
@@ -46,7 +60,7 @@
         }
     })
 
-    //util each,merge,
+    //工具函数 (each, merge),
     jex.extend({
         each: function (o, fn) {
             if (jex.isArray(o)) {
@@ -68,7 +82,7 @@
     });
 
 
-    //classManager
+    //类管理模块 (包括： 继承, 储存类的模板, 搜索类, 添加类)
     jex.extend({
         constructors: [],
         models: [],
@@ -97,11 +111,17 @@
 
     }, jex.classManager);
 
-    //html
+    //定义 所有组件的 dom元素，并管理
     jex.extend({
         dom: [
-            {alias: 'viewport', dom: '<div class=' + jex.prefix + 'viewport></div>'},
-            {alias: 'panel', dom: '<div class=' + jex.prefix + 'panel></div>'}
+            {
+                alias: 'viewport',
+                dom: '<div class=' + jex.prefix + 'viewport></div>'
+            },
+            {
+                alias: 'panel',
+                dom: '<div class=' + jex.prefix + 'panel></div>'
+            }
         ],
         getDom: function (alias) {
             var dom;
@@ -160,24 +180,36 @@
         },
         define: function (name, opt) {
 
+            //添加dom元素
             opt.element = jex.html.getDom(opt.alias);
+
+            //生成构造函数
             var fn = jex.generateFc(opt);
 
+            //获取父类构造函数
             var parentClass = (opt.extend == 'undefined' ? null : jex.classManager.getClass(opt.extend));
 
+            //实现继承
             var subClass = fn;
             if (parentClass) {
                 subClass = jex.inherit(fn, parentClass);
             }
 
+            //添加到 类管理模块
             jex.classManager.addClass(subClass);
             jex.classManager.addModel(opt);
         },
         create: function (alias, options) {
+            //获取model
             var model = jex.classManager.getClass(alias, true);
+
             var constructor = jex.generateFc(jex.merge(model, options));
             var instance = new constructor();
             jex.instances.push(instance);
+
+            if (jex.type == 'view') {
+                view.ready();
+            }
 
             return instance;
         }

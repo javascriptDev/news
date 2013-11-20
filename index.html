@@ -7,8 +7,20 @@
     <script src="core/panel.js"></script>
     <script>
 
-        jex.create('viewport');
-        jex.create('panel');
+        jex.application({
+            views: [],
+            controllers: [],
+            models: [],
+            stores: [],
+            start: function () {
+                var viewport = jex.create('viewport');
+                viewport.add(jex.create('panel'));
+
+            }
+
+
+
+        });
     </script>
 </head>
 <body>
