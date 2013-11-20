@@ -57,6 +57,9 @@
         },
         isObject: function (o) {
             return o && Object.prototype.toString.call(o) == '[object Object]';
+        },
+        isDom: function (o) {
+            return o && o instanceof HTMLElement;
         }
     })
 
@@ -113,9 +116,10 @@
         updateModel: function (instance) {
             var index = 0;
             jex.each(jex.classManager.models, function (item, i) {
-                if (item.element.id == instance.element.id) {
+                if (item.uid == instance.uid) {
                     index = i;
                     return;
+                    //todo:
                 }
             });
             jex.classManager.models[index] = instance;
@@ -141,6 +145,15 @@
                     var outer = document.createElement('div');
                     outer.className = jex.prefix + 'panel';
                     outer.id = jex.prefix + document.querySelectorAll('.' + jex.prefix + 'panel').length;
+                    return outer;
+                }
+            },
+            {
+                alias: 'titlebar',
+                dom: function () {
+                    var outer = document.createElement('div');
+                    outer.className = jex.prefix + 'titlebar';
+                    outer.id = jex.prefix + document.querySelectorAll('.' + jex.prefix + 'titlebar').length;
                     return outer;
                 }
             }
@@ -214,7 +227,7 @@
         define: function (name, opt) {
 
             //添加dom元素
-            opt.element = jex.html.getDom(opt.alias);
+
 
             //生成构造函数
             var fn = jex.generateFc(opt);
@@ -224,6 +237,7 @@
 
             //添加到 类管理模块
             jex.classManager.addClass(fn);
+            opt.uid = Math.floor(Math.random() * 1000000) + '';
             jex.classManager.addModel(opt);
         },
         create: function (alias, options) {
@@ -238,6 +252,7 @@
             }
 
             var instance = new subclass();
+            instance.element = jex.html.getDom(model.alias) || '';
             jex.instances.push(instance);
 
             if (jex.type == 'view') {
