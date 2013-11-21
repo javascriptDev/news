@@ -9,18 +9,23 @@ jex.define('main', {
     },
     items: [
         {
-            alias: 'panel',
-            id: 'wai',
+            title: 'news',
             items: [
                 {
-                    alias: 'titlebar'
+                    alias: 'titlebar',
+                    text: 'news'
                 }
             ]
 
         },
         {
-            alias: 'titlebar',
-            id: 'wai'
+            title: 'info',
+            items: [
+                {
+                    alias: 'titlebar',
+                    text: 'asdasds'
+                }
+            ]
         }
     ]
 

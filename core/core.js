@@ -127,7 +127,6 @@
     }, jex.classManager);
 
 
-
     //define, create
     jex.extend({
         inherit: function (subclass, superclass) {
@@ -156,7 +155,12 @@
         },
         digui: function (items, instance, i) {
             jex.each(items, function (item, index) {
-                instance.childs.push(jex.create(item.alias, item));
+                if (item.alias) {
+                    instance.childs.push(jex.create(item.alias, item));
+                } else { //tab
+
+
+                }
             });
         },
         generateFc: function (o) {

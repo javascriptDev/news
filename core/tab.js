@@ -5,7 +5,11 @@ jex.define('tab', {
     alias: 'tab',
 
     getTab: function () {
+    },
+    ready: function () {
+
     }
+
 
 
 
