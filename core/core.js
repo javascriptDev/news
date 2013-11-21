@@ -144,7 +144,7 @@
                 dom: function () {
                     var outer = document.createElement('div');
                     outer.className = jex.prefix + 'panel';
-                    outer.id = jex.prefix + 'panel' + document.querySelectorAll('.' + jex.prefix + 'panel').length;
+                    outer.id = jex.prefix + 'panel' + jex.instances.length;
                     return outer;
                 }
             },
@@ -153,7 +153,7 @@
                 dom: function () {
                     var outer = document.createElement('div');
                     outer.className = jex.prefix + 'titlebar';
-                    outer.id = jex.prefix + 'titlebar' + document.querySelectorAll('.' + jex.prefix + 'titlebar').length;
+                    outer.id = jex.prefix + 'titlebar' + jex.instances.length;
                     return outer;
                 }
             }
@@ -271,21 +271,21 @@
 
             return instance;
         },
-        render: function (viewport, parent) {
-
+        render: function (viewport) {
             var childs = viewport.childs;
             jex.each(childs, function (item, index) {
                 if (item.childs) {
-                    jex.render(item, viewport);
+                    jex.render(item);
                 }
-                if (parent) {
-                    if (!parent.element) {
-                        parent.element = document.createElement('div');
-                        parent.element.className = 'app-main';
-                    }
-                    parent.element.appendChild(viewport.element);
+                if (!viewport.element) {
+                    viewport.element = document.createElement('div');
+                    viewport.element.className = 'app-main';
                 }
+                viewport.element.appendChild(item.element);
             });
+            documnet.onload = function () {
+                document.body.appendChild(jex.instances[0].element);
+            }
 
         }
 
