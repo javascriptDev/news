@@ -7,18 +7,20 @@ jex.define('viewport', {
     config: {
 
     },
+    parent: document.body,
     ready: function () {
         var dom = this.element;
-        console.log('viewport' + dom);
+        // this.parent.appendChild(dom);
     },
     render: function () {
     },
-    items: [],
+    childs: [],
     unload: function () {
     },
     add: function (instance) {
-        this.items.push(instance);
+        this.childs.push(instance);
         jex.classManager.updateModel(this);
+        jex.render(this);
 
     }
 

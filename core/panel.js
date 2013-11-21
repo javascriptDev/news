@@ -11,7 +11,7 @@ jex.define('panel', {
     items: [],
     ready: function () {
         var dom = this.element;
-        console.log('panel' + dom);
+        console.log('panel-->' + dom.outerHTML);
     },
     show: function () {
     }

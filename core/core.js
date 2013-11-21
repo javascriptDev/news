@@ -144,7 +144,7 @@
                 dom: function () {
                     var outer = document.createElement('div');
                     outer.className = jex.prefix + 'panel';
-                    outer.id = jex.prefix + document.querySelectorAll('.' + jex.prefix + 'panel').length;
+                    outer.id = jex.prefix + 'panel' + document.querySelectorAll('.' + jex.prefix + 'panel').length;
                     return outer;
                 }
             },
@@ -153,7 +153,7 @@
                 dom: function () {
                     var outer = document.createElement('div');
                     outer.className = jex.prefix + 'titlebar';
-                    outer.id = jex.prefix + document.querySelectorAll('.' + jex.prefix + 'titlebar').length;
+                    outer.id = jex.prefix + 'titlebar' + document.querySelectorAll('.' + jex.prefix + 'titlebar').length;
                     return outer;
                 }
             }
@@ -195,6 +195,12 @@
             });
             return subclass;
         },
+        digui: function (items, instance, i) {
+
+            jex.each(items, function (item, index) {
+                instance.childs.push(jex.create(item.alias, item));
+            });
+        },
         generateFc: function (o) {
 
             var fn = 'var temp = function ' + o.alias + '(){';
@@ -212,8 +218,12 @@
                         fn += 'this.' + key + '.' + k + '="' + i + '";';
                     });
 
-                } else if (jex.isArray(item)) {
-                    fn += 'this.' + key + '=' + (item.length == 0 ? "[]" : item) + ';';
+                }
+                else if (jex.isArray(item)) {
+                    if (item.length == 0) {
+                        fn += 'this.' + key + '=[] ;';
+                    }
+
                 }
             });
             fn += '}';
@@ -225,19 +235,12 @@
             return temp;
         },
         define: function (name, opt) {
-
-            //添加dom元素
-
-
             //生成构造函数
             var fn = jex.generateFc(opt);
 
-            //获取父类构造函数
-
-
             //添加到 类管理模块
             jex.classManager.addClass(fn);
-            opt.uid = Math.floor(Math.random() * 1000000) + '';
+            opt.uid = Math.floor(Math.random() * Math.random() * 10000000) + '';
             jex.classManager.addModel(opt);
         },
         create: function (alias, options) {
@@ -252,15 +255,40 @@
             }
 
             var instance = new subclass();
-            instance.element = jex.html.getDom(model.alias) || '';
-            jex.instances.push(instance);
+            instance.element = jex.html.getDom(model.alias) || new parentClass().element;
 
-            if (jex.type == 'view') {
+
+            if (model.items) {
+                instance.childs = [];
+                jex.digui(model.items, instance);
+            }
+
+
+            jex.instances.push(instance);
+            if (instance.type == 'view') {
                 instance.ready();
             }
 
             return instance;
+        },
+        render: function (viewport, parent) {
+
+            var childs = viewport.childs;
+            jex.each(childs, function (item, index) {
+                if (item.childs) {
+                    jex.render(item, viewport);
+                }
+                if (parent) {
+                    if (!parent.element) {
+                        parent.element = document.createElement('div');
+                        parent.element.className = 'app-main';
+                    }
+                    parent.element.appendChild(viewport.element);
+                }
+            });
+
         }
+
     });
     window['jex'] = jex;
 }());
