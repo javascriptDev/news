@@ -5,7 +5,6 @@ jex.define('viewport', {
     alias: 'viewport',
     type: 'view',
     config: {
-
     },
     parent: document.body,
     ready: function () {

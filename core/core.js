@@ -255,7 +255,7 @@
             }
 
             var instance = new subclass();
-            instance.element = jex.html.getDom(model.alias) || new parentClass().element;
+            instance.element = jex.html.getDom(model.alias) || jex.html.getDom(model.extend);
 
 
             if (model.items) {
@@ -278,15 +278,10 @@
                     jex.render(item);
                 }
                 if (!viewport.element) {
-                    viewport.element = document.createElement('div');
-                    viewport.element.className = 'app-main';
+                    jex.error.show('Render faild!' + viewport + 'has no attribute element!');
                 }
                 viewport.element.appendChild(item.element);
             });
-            documnet.onload = function () {
-                document.body.appendChild(jex.instances[0].element);
-            }
-
         }
 
     });
