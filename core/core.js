@@ -158,8 +158,14 @@
                 if (item.alias) {
                     instance.childs.push(jex.create(item.alias, item));
                 } else { //tab
-
-
+                    if (item.items) {
+                        var barText = item.title;
+                        jex.each(item.items, function (item1, index) {
+                            var ins = jex.create(item1.alias, item1);
+                            ins.barText = barText;
+                            instance.childs.push(ins);
+                        });
+                    }
                 }
             });
         },
@@ -215,17 +221,12 @@
             if (parentClass) {
                 subclass = jex.inherit(subclass, parentClass);
             }
-
             var instance = new subclass();
             instance.element = jex.html.getDom(model.alias) || jex.html.getDom(model.extend);
-
-
             if (model.items) {
                 instance.childs = [];
                 jex.digui(model.items, instance);
             }
-
-
             jex.instances.push(instance);
             if (instance.type == 'view') {
                 instance.ready();
