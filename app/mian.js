@@ -3,7 +3,7 @@
  */
 jex.define('main', {
     alias: 'main',
-    extend: 'panel',
+    extend: 'tab',
     config: {
 
     },

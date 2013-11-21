@@ -3,11 +3,15 @@
 <head>
     <title></title>
     <script src="core/core.js"></script>
+    <script src="core/DOM.js"></script>
     <script src="core/viewport.js"></script>
     <script src="core/panel.js"></script>
     <script src="core/titlebar.js"></script>
     <script src="app/mian.js"></script>
     <link href="core/css/a.css" rel="stylesheet">
+    <script src="core/tab.js"></script>
+
+
     <script>
 
         jex.application({
@@ -19,6 +23,9 @@
                 var viewport = jex.create('viewport');
                 var panel = jex.create('main');
                 viewport.add(panel);
+                jex.start();
+
+
             }
 
 

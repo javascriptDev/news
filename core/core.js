@@ -126,47 +126,6 @@
         }
     }, jex.classManager);
 
-    //定义 所有组件的 dom元素，并管理
-    jex.extend({
-        dom: [
-            {
-                alias: 'viewport',
-                dom: function () {
-                    var outer = document.createElement('div');
-                    outer.className = jex.prefix + 'viewport';
-                    outer.id = 'viewport';
-                    return outer;
-
-                }
-            },
-            {
-                alias: 'panel',
-                dom: function () {
-                    var outer = document.createElement('div');
-                    outer.className = jex.prefix + 'panel';
-                    outer.id = jex.prefix + 'panel' + jex.instances.length;
-                    return outer;
-                }
-            },
-            {
-                alias: 'titlebar',
-                dom: function () {
-                    var outer = document.createElement('div');
-                    outer.className = jex.prefix + 'titlebar';
-                    outer.id = jex.prefix + 'titlebar' + jex.instances.length;
-                    return outer;
-                }
-            }
-        ],
-        getDom: function (alias) {
-            var dom;
-            jex.each(jex.html.dom, function (item, index) {
-                if (item.alias == alias) {
-                    dom = item.dom();
-                }
-            });
-            return dom;
-        }}, jex.html);
 
 
     //define, create
@@ -196,7 +155,6 @@
             return subclass;
         },
         digui: function (items, instance, i) {
-
             jex.each(items, function (item, index) {
                 instance.childs.push(jex.create(item.alias, item));
             });
@@ -282,6 +240,42 @@
                 }
                 viewport.element.appendChild(item.element);
             });
+        },
+        start: function () {
+
+            function addMeta(name, content) {
+                var meta = document.createElement('meta');
+
+                meta.setAttribute('name', name);
+                meta.setAttribute('content', content);
+                document.head.appendChild(meta);
+            }
+
+            function addStartupImage(href, media) {
+                var link = document.createElement('link');
+                link.setAttribute('rel', 'apple-touch-startup-image');
+                link.setAttribute('href', href);
+                if (media) {
+                    link.setAttribute('media', media);
+                }
+                head.append(link);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+
+                if (navigator.standalone) {//是否全屏模式
+                    addMeta('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0');
+                }
+                else {
+                    addMeta('viewport', 'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0');
+                }
+                addMeta('apple-mobile-web-app-capable', 'yes');
+                addMeta('apple-touch-fullscreen', 'yes');
+
+                document.body.appendChild(jex.instances[0].element);
+
+            }, false);
         }
 
     });
