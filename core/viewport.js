@@ -4,6 +4,7 @@
 jex.define('viewport', {
     alias: 'viewport',
     type: 'view',
+    isComponet: 'true',
     config: {
     },
     parent: document.body,

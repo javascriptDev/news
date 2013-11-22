@@ -110,6 +110,7 @@
                 if (item.alias == alias) {
                     fn = item;
                 }
+
             });
             return fn;
         },
@@ -210,10 +211,12 @@
             //添加到 类管理模块
             jex.classManager.addClass(fn);
             opt.uid = Math.floor(Math.random() * Math.random() * 10000000) + '';
+
             jex.classManager.addModel(opt);
         },
         create: function (alias, options) {
             //获取model
+
             var model = jex.merge(jex.classManager.getModel(alias), options);
             var parentClass = (model.extend == 'undefined' ? null : jex.classManager.getClass(model.extend));
 
@@ -232,7 +235,7 @@
             if (instance.type == 'view') {
                 instance.ready();
             }
-
+            instance.uid = Math.floor(Math.random() * Math.random() * 10000000) + '';
             return instance;
         },
         render: function (viewport) {
@@ -253,12 +256,10 @@
         },
         start: function () {
             jex.each(jex.instances, function (item) {
-                if (jex.isFunction(item.rendered)) {
+                if (jex.isFunction(item.beforeRender)) {
                     item.beforeRender();
                 }
             });
-
-
             function addMeta(name, content) {
                 var meta = document.createElement('meta');
 
@@ -290,7 +291,7 @@
                 document.body.appendChild(jex.instances[0].element);
 
                 //调用 rendered
-                jex.each(jex.instances, function (item) {
+                jex.each(jex.instances, function (item) {// 递归所有dom
                     if (jex.isFunction(item.rendered)) {
                         item.rendered();
                     }
