@@ -22,5 +22,4 @@ jex.define('viewport', {
         jex.render(this);
 
     }
-
 })

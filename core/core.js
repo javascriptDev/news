@@ -159,11 +159,12 @@
                     instance.childs.push(jex.create(item.alias, item));
                 } else { //tab
                     if (item.items) {
+                        instance.childs[index] = [];
                         var barText = item.title;
-                        jex.each(item.items, function (item1, index) {
+                        jex.each(item.items, function (item1, index1) {
                             var ins = jex.create(item1.alias, item1);
                             ins.barText = barText;
-                            instance.childs.push(ins);
+                            instance.childs[index].push(ins);
                         });
                     }
                 }
@@ -243,10 +244,20 @@
                 if (!viewport.element) {
                     jex.error.show('Render faild!' + viewport + 'has no attribute element!');
                 }
-                viewport.element.appendChild(item.element);
+
+                //todo:
+                if (!viewport.getTab) {
+                    viewport.element.appendChild(item.element);
+                }
             });
         },
         start: function () {
+            jex.each(jex.instances, function (item) {
+                if (jex.isFunction(item.rendered)) {
+                    item.beforeRender();
+                }
+            });
+
 
             function addMeta(name, content) {
                 var meta = document.createElement('meta');
@@ -267,8 +278,6 @@
             }
 
             document.addEventListener('DOMContentLoaded', function () {
-
-
                 if (navigator.standalone) {//是否全屏模式
                     addMeta('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0');
                 }
@@ -279,6 +288,13 @@
                 addMeta('apple-touch-fullscreen', 'yes');
 
                 document.body.appendChild(jex.instances[0].element);
+
+                //调用 rendered
+                jex.each(jex.instances, function (item) {
+                    if (jex.isFunction(item.rendered)) {
+                        item.rendered();
+                    }
+                });
 
             }, false);
         }

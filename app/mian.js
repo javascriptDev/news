@@ -4,6 +4,7 @@
 jex.define('main', {
     alias: 'main',
     extend: 'tab',
+    type: 'view',
     config: {
 
     },
@@ -14,6 +15,10 @@ jex.define('main', {
                 {
                     alias: 'titlebar',
                     text: 'news'
+                },
+                {
+                    alias: 'panel',
+                    text: 'panel1'
                 }
             ]
 
@@ -27,6 +32,11 @@ jex.define('main', {
                 }
             ]
         }
-    ]
+    ],
+    ready: function () {
+
+
+    }
+
 
 });
