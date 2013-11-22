@@ -26,19 +26,31 @@ jex.define('tab', {
         var main = dom.querySelector('.' + mainCls);
         var bars = dom.querySelector('.' + bars);
 
-        this.setChildDom(items, main, bars);
+        var isItem = true;
+        this.setChildDom(items, main, bars, isItem);
     },
-    setChildDom: function (items) {
+    setChildDom: function (items, main, bars, isItem) {
         var that = this;
+        var itemContainer, barContainer;
+        if (isItem) {
+            itemContainer = doucment.createElement('div');
+            itemContainer.className = jex.prefix + 'main-' + index;
+            barContainer = document.createElement('div');
+            barContainer.className = jex.prefix + 'tab-' + index;
+        }
+
         jex.each(items, function (item, index) {
             if (item.items) {
-                that.setChildDom(item);
+                that.setChildDom(item, main, bar, false);
+            }
+            if (itemContainer) {
+
+            }
+            if (barContainer) {
+
             }
 
-
         });
-
-
     },
     rendered: function () {
 

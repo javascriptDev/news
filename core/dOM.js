@@ -47,6 +47,9 @@ jex.extend({
                 outer.appendChild(bar);
                 outer.appendChild(main);
                 return outer;
+            },
+            getClsList: function () {
+                return {bars: jex.prefix + 'tab-bars', main: jex.prefix + 'tab-main'}
             }
         }
     ],
@@ -58,4 +61,14 @@ jex.extend({
             }
         });
         return dom;
-    }}, jex.html);
+    },
+    getInfo: function (alias) {
+        var info;
+        jex.each(jex.html.dom, function (item, index) {
+            if (item.alias == alias) {
+                info = item;
+            }
+        });
+        return info;
+    }
+}, jex.html);
