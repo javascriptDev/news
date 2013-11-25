@@ -90,7 +90,7 @@ jex.extend({
 
         init: function () {
 
-            docment.body.onclick = function (e) {
+            document.body.onclick = function (e) {
                 jex.EventManager.publish('tap', e);
             }
 

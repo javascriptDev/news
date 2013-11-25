@@ -94,43 +94,49 @@
 
     //类管理模块 (包括： 继承, 储存类的模板, 搜索类, 添加类)
     jex.extend({
-        constructors: [],
-        models: [],
-        addClass: function (fn) {
-            jex.classManager.constructors.push(fn);
+        constructors: {
+            view: [],
+            ctl: [],
+            model: [],
+            store: []
         },
-        addModel: function (tpl) {
-            jex.classManager.models.push(tpl);
+        models: {
+            view: [],
+            ctl: [],
+            model: [],
+            store: []
+
         },
-        getClass: function (alias) {
+        addClass: function (fn, type) {
+            jex.classManager.constructors[type].push(fn);
+        },
+        addModel: function (tpl, type) {
+            jex.classManager.models[type].push(tpl);
+        },
+        getClass: function (alias, type) {
             var fn;
-            jex.each(jex.classManager.constructors, function (item, i) {
+            if (!type) {
+                type = 'view';
+            }
+            jex.each(jex.classManager.constructors[type], function (item, i) {
                 if (item.name == alias) {
                     fn = item;
                 }
             });
             return fn;
         },
-        getModel: function (alias) {
+        getModel: function (alias, type) {
             var fn;
-            jex.each(jex.classManager.models, function (item, i) {
+            if (!type) {
+                type = 'view';
+            }
+            jex.each(jex.classManager.models[type], function (item, i) {
                 if (item.alias == alias) {
                     fn = item;
                 }
 
             });
             return jex.deepCopy(fn);
-        },
-        updateModel: function (instance) {
-            var index = 0;
-            jex.each(jex.classManager.models, function (item, i) {
-                if (item.uid == instance.uid) {
-                    index = i;
-                    return;
-                    //todo:
-                }
-            });
-            jex.classManager.models[index] = instance;
         }
     }, jex.classManager);
 
@@ -245,7 +251,7 @@
 
 
         /*
-         * 功能：生成构造函数
+         * 功能：生成View构造函数
          *
          * 解析 配置项的 键值对
          *
@@ -255,7 +261,7 @@
          * 4.解析 数组
          *
          * */
-        generateFc: function (o) {
+        generateViewConstructor: function (o) {
 
             var fn = 'var temp = function ' + o.alias + '(){';
             var funcArray = [];
@@ -288,6 +294,42 @@
 
 
         /*
+         * 功能: 生成 Controller 构造函数
+         *
+         * 解析 配置项的 键值对
+         *
+         * 1.解析 包含对象的数组
+         * 2.解析 函数
+         * 3.解析 字符串
+         * */
+        generateCtlContructor: function (o) {
+
+        },
+
+        generateConstructor: function (o, type) {
+
+            switch (type) {
+                case 'view':
+                    jex.generateViewConstructor(o);
+                    break;
+                case 'ctl':
+                    jex.generateCtlContructor(o);
+                    break;
+                case 'store':
+                    ;
+                    break;
+                case 'model':
+                    ;
+                    break;
+                default:
+                    break;
+
+
+            }
+
+        },
+
+        /*
          * 功能: 生成Model 并保存
          *
          * 1.根据配置项 生成构造函数
@@ -296,16 +338,19 @@
          */
         define: function (name, opt) {
             //生成构造函数
-            var fn = jex.generateFc(opt);
+            var fn = jex.generateViewConstructor(opt);
+            if (!opt.type) {
+                opt.type = 'view';
+            }
 
             //添加类
-            jex.classManager.addClass(fn);
+            jex.classManager.addClass(fn, opt.type);
 
             //设置对象的唯一ID
             opt.uid = Math.floor(Math.random() * Math.random() * 10000000) + '';
 
             //添加到 Model
-            jex.classManager.addModel(opt);
+            jex.classManager.addModel(opt, opt.type);
         },
 
 
@@ -325,14 +370,17 @@
         create: function (alias, options) {
 
             //获取model
-            var baseModel = jex.classManager.getModel(alias);
+            if (!options) {
+                options = {type: 'view'};
+            }
+            var baseModel = jex.classManager.getModel(alias, options.type);
             var model = jex.merge(baseModel, options);
 
             //获取 父类
-            var parentClass = (model.extend == 'undefined' ? null : jex.classManager.getClass(model.extend));
+            var parentClass = (model.extend == 'undefined' ? null : jex.classManager.getClass(model.extend, options.type));
 
             //实现继承
-            var subclass = jex.generateFc(model);
+            var subclass = jex.generateViewConstructor(model);
             if (parentClass) {
                 subclass = jex.inherit(subclass, parentClass);
             }
@@ -354,6 +402,9 @@
             //调用 view 的 ready 方法
             if (instance.type == 'view') {
                 instance.ready();
+            }
+            if (instance.type == 'ctl') {
+                instance.init();
             }
 
             //设置 对象的唯一身份 ID
@@ -436,6 +487,8 @@
                         item.rendered();
                     }
                 });
+
+                jex.EventManager.init();
 
             }, false);
         }
