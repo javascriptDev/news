@@ -51,6 +51,16 @@ jex.extend({
             getClsList: function () {
                 return {bars: jex.prefix + 'tab-bars', main: jex.prefix + 'tab-main'}
             }
+        },
+        {
+            alias: 'button',
+            dom: function () {
+                var outer = document.createElement('div');
+                outer.className = jex.prefix + 'button';
+                outer.id = jex.prefix + 'button' + jex.instancesManager.getLen();
+                return outer;
+
+            }
         }
     ],
     getDom: function (alias) {

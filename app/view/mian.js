@@ -14,7 +14,17 @@ jex.define('main', {
             items: [
                 {
                     alias: 'titlebar',
-                    text: 'news'
+                    text: 'news',
+                    items: [
+                        {
+                            alias: 'button',
+                            text: 'select'
+                        },
+                        {
+                            alias: 'button',
+                            text: 'cancel'
+                        }
+                    ]
                 },
                 {
                     alias: 'panel',

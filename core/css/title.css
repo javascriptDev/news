@@ -1,0 +1,10 @@
+.jex-component-titlebar {
+    height: 50px;
+    line-height: 50px;
+    display: -webkit-box;
+    -webkit-box-direction: horizontal;
+    text-align: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+
+}

@@ -42,33 +42,44 @@ jex.define('tab', {
 
 
     },
-    setChildDom: function (items, main, bars, isItem) {
+
+    /*
+     * 功能: 递归 给父元素加DOM
+     *
+     * 参数：
+     * items:  所有子元素
+     *  main:  tab main的 容器
+     *  bars:  tab bars 容器
+     *  isItem: 是不是一个tab的 页面
+     * */
+    setChildDom: function (items, main, bars, isItem, itemContainer, itemBarContainer) {
         var that = this;
-        var itemContainer = null, barContainer = null;
+
         if (isItem) {
             itemContainer = document.createElement('div');
             itemContainer.className = jex.prefix + 'main-item';
-            barContainer = document.createElement('div');
-            barContainer.className = jex.prefix + 'tab-item';
+            itemBarContainer = document.createElement('div');
+            itemBarContainer.className = jex.prefix + 'tab-item';
         }
 
         jex.each(items, function (item, index) {
-            if (item.items && item.items.length > 0) {
-                that.setChildDom(item, main, bars, false);
+            if (item.childs && item.childs.length > 0) {
+                that.setChildDom(item.childs, main, bars, false, item.element, itemBarContainer);
             }
-            if (itemContainer) {
 
-                var el = jex.instancesManager.getIns(item.uid).element;
-                itemContainer.appendChild(el);
-                main.appendChild(itemContainer);
-            }
-            if (barContainer) {
+
+            var el = jex.instancesManager.getIns(item.uid).element;
+            itemContainer.appendChild(el);
+            main.appendChild(itemContainer);
+
+            if (isItem) {
                 var bar = document.createElement('div');
                 bar.className = jex.prefix + 'tab-item-inner';
                 bar.innerText = item.barText;
-                barContainer.appendChild(bar);
-                bars.appendChild(barContainer);
-                barContainer = null;
+                itemBarContainer.appendChild(bar);
+                bars.appendChild(itemBarContainer);
+                //确保同一个页面的所有元素对应一个tab
+                isItem = false;
             }
 
 
