@@ -1,0 +1,22 @@
+.jex-component-button {
+    height: 80%;
+
+    display: -webkit-box;
+    max-width: 100px;;
+    line-height: 80%;
+    background: red;
+    color: white;
+    font-weight: bolder;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+
+.button-align-left {
+    display: -webkit-box;
+
+}
+
+.button-align-right {
+    display: -webkit-box;
+
+}

@@ -13,9 +13,11 @@ jex.define('button', {
     beforeRender: function () {
         this.element.innerText = this.text || 'undefined';
 
+        var align = this.align || left;
         if (this.id) {
             this.element.id = this.id;
         }
+        this.element.className += ' button-align-' + align;
 
 
         jex.instancesManager.update(this);

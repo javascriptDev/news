@@ -13,7 +13,7 @@
     width: 100%;
     background: brown;
     display: -webkit-box;
-    -webkit-box-direction: horizontal;
+    -webkit-box-orient: horizontal;
 
 }
 
