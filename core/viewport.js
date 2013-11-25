@@ -9,8 +9,7 @@ jex.define('viewport', {
     },
     parent: document.body,
     ready: function () {
-        var dom = this.element;
-        // this.parent.appendChild(dom);
+        console.log('viewport');
     },
     render: function () {
     },

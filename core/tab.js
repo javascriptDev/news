@@ -58,7 +58,7 @@ jex.define('tab', {
             }
             if (itemContainer) {
 
-                var el = jex.create(item.alias).element;
+                var el = jex.instancesManager.getIns(item.uid).element;
                 itemContainer.appendChild(el);
                 main.appendChild(itemContainer);
             }
