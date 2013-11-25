@@ -176,6 +176,16 @@
                 }
             })
             jex.instancesManager.instances[index] = model;
+        },
+        getbyAlias: function (alias) {
+            var result = [];
+            jex.each(jex.instancesManager.instances, function (item, i) {
+                if (item.alias == alias) {
+                    //todo: 获取想要的数据之后不能及时退出循环
+                    result.push(item);
+                }
+            })
+            return result;
         }
 
     }, jex.instancesManager)

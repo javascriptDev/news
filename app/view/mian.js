@@ -18,11 +18,13 @@ jex.define('main', {
                     items: [
                         {
                             alias: 'button',
-                            text: 'select'
+                            text: 'select',
+                            id: 'a'
                         },
                         {
                             alias: 'button',
-                            text: 'cancel'
+                            text: 'cancel',
+                            id: 'b'
                         }
                     ]
                 },

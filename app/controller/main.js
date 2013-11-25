@@ -4,12 +4,23 @@
 jex.define('main', {
     extend: 'controller',
     view: 'main',
-
-    contorls: {
-
-    }
-
-
+    type: 'ctl',
+    contorls: [
+        {
+            selector: '#a',
+            type: 'tap',
+            handler: function () {
+                alert(1);
+            }
+        },
+        {
+            selector: '#b',
+            type: 'tap',
+            handler: function () {
+                alert(2);
+            }
+        }
+    ]
 
 
 })

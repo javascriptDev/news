@@ -6,6 +6,7 @@ jex.extend({
         events: [],
         Event: function (name) {
             var handlers = [];
+            var selectors = [];
             this.getName = function () {
                 return name;
             }
@@ -24,6 +25,12 @@ jex.extend({
                     h(eventArgs);
                 })
             }
+            this.addEl = function (selector) {
+                selectors.push(selectors);
+            }
+            this.getSelectors = function () {
+                return selectors;
+            }
         },
         getEvent: function (name) {
             var fn;
@@ -36,8 +43,7 @@ jex.extend({
             return fn;
         },
 
-        subscribe: function (eventName, handler) {
-
+        subscribe: function (eventName, handler, selector) {
             var event = jex.EventManager.getEvent(eventName);
 
             if (!event) {
@@ -45,16 +51,50 @@ jex.extend({
                 jex.EventManager.events.push(event);
             }
             event.addHandler(handler);
+            event.addEl(selector);
         },
 
+        check: function (event, eventArgs) {
+
+            var result = false;
+
+            /*触发事件的必备条件(满足一个即可触发)
+             1.事件元素正好就是注册时候的 元素
+             2.事件元素是 事件元素的子元素
+             */
+
+            var selectors = event.getSelectors();
+
+            var target = eventArgs.srcElement;
+            jex.each(selectors, function (item) {
+                if (item.indexOf(target.id) != -1 || jex.instancesManager.getbyAlias('viewport').element.querySelector(item)) {
+                    result = true;
+                }
+
+            });
+            return result;
+
+        },
         publish: function (eventName, eventArgs) {
 
-            var event = this.getEvent(eventName);
+            var event = jex.EventManager.getEvent(eventName);
             if (!event) {
                 event = new jex.EventManager.Event(eventName);
                 jex.EventManager.events.push(event);
             }
-            event.fire(eventArgs);
+
+            if (this.check(event, eventArgs)) {
+                event.fire();
+            }
+        },
+
+        init: function () {
+
+            docment.body.onclick = function (e) {
+                jex.EventManager.publish('tap', e);
+            }
+
+
         }
 
     }

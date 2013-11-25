@@ -12,6 +12,12 @@ jex.define('button', {
     },
     beforeRender: function () {
         this.element.innerText = this.text || 'undefined';
+
+        if (this.id) {
+            this.element.id = this.id;
+        }
+
+
         jex.instancesManager.update(this);
     }
 
