@@ -38,7 +38,7 @@ jex.define('tab', {
         this.element.appendChild(main);
         this.element.appendChild(bars);
 
-        jex.classManager.updateModel(this);
+        jex.instancesManager.update(this);
 
 
     },

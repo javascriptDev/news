@@ -18,7 +18,7 @@ jex.define('viewport', {
     },
     add: function (instance) {
         this.childs.push(instance);
-        jex.classManager.updateModel(this);
+        jex.instancesManager.update(this);
         jex.render(this);
 
     }

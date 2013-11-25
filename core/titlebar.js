@@ -16,6 +16,6 @@ jex.define('titlebar', {
 
         this.element.innerText = this.text;
 
-        jex.classManager.updateModel(this);
+        jex.instancesManager.update(this);
     }
 })

@@ -81,6 +81,13 @@
                 o1[key] = item;
             })
             return o1;
+        },
+        deepCopy: function (o) {
+            var obj = {};
+            for (var i in o) {
+                obj[i] = o[i];
+            }
+            return obj;
         }
     });
 
@@ -112,7 +119,7 @@
                 }
 
             });
-            return fn;
+            return jex.deepCopy(fn);
         },
         updateModel: function (instance) {
             var index = 0;
@@ -159,6 +166,16 @@
         },
         getAll: function () {
             return jex.instancesManager.instances;
+        },
+        update: function (model) {
+            var index = 0;
+            jex.each(jex.instancesManager.instances, function (item, i) {
+                if (item.uid == model.uid) {
+                    //todo: 获取想要的数据之后不能及时退出循环
+                    index = i;
+                }
+            })
+            jex.instancesManager.instances[index] = model;
         }
 
     }, jex.instancesManager)
@@ -195,6 +212,9 @@
             return subclass;
         },
 
+        /*
+         * 递归函数
+         */
         digui: function (items, instance, i) {
             jex.each(items, function (item, index) {
                 if (item.alias) {
@@ -295,7 +315,8 @@
         create: function (alias, options) {
 
             //获取model
-            var model = jex.merge(jex.classManager.getModel(alias), options);
+            var baseModel = jex.classManager.getModel(alias);
+            var model = jex.merge(baseModel, options);
 
             //获取 父类
             var parentClass = (model.extend == 'undefined' ? null : jex.classManager.getClass(model.extend));
@@ -312,7 +333,7 @@
             instance.element = jex.html.getDom(model.alias) || jex.html.getDom(model.extend);
 
             //遍历 Item 元素
-            if (model.items) {
+            if (model.items && model.items.length > 0) {
                 instance.childs = [];
                 jex.digui(model.items, instance);
             }
@@ -345,7 +366,7 @@
                     jex.error.show('Render faild!' + viewport + 'has no attribute element!');
                 }
 
-                //todo:
+                //todo:判断是不是 tab 组件 有问题
                 if (!viewport.getTab) {
                     //如果不是tab，直接把 item的元素加进 组件
                     viewport.element.appendChild(item.element);

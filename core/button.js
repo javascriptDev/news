@@ -12,7 +12,7 @@ jex.define('button', {
     },
     beforeRender: function () {
         this.element.innerText = this.text || 'undefined';
-        jex.classManager.updateModel(this);
+        jex.instancesManager.update(this);
     }
 
 })
