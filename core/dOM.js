@@ -19,7 +19,7 @@ jex.extend({
             dom: function () {
                 var outer = document.createElement('div');
                 outer.className = jex.prefix + 'panel';
-                outer.id = jex.prefix + 'panel' + jex.instances.length;
+                outer.id = jex.prefix + 'panel' + jex.instancesManager.getLen();
                 return outer;
             }
         },
@@ -28,7 +28,7 @@ jex.extend({
             dom: function () {
                 var outer = document.createElement('div');
                 outer.className = jex.prefix + 'titlebar';
-                outer.id = jex.prefix + 'titlebar' + jex.instances.length;
+                outer.id = jex.prefix + 'titlebar' + jex.instancesManager.getLen();
                 return outer;
             }
         },
