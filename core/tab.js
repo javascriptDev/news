@@ -6,7 +6,9 @@ jex.define('tab', {
     type: 'view',
     isComponet: 'true',
 
-    getTab: function () {
+    _items: [],
+    getItems: function () {
+        return jex.instancesManager.getbyAlias(this.alias).childs;
     },
     ready: function () {
 
@@ -37,10 +39,7 @@ jex.define('tab', {
         this.element.innerHTML = '';
         this.element.appendChild(main);
         this.element.appendChild(bars);
-
         jex.instancesManager.update(this);
-
-
     },
 
     /*
@@ -66,8 +65,6 @@ jex.define('tab', {
             if (item.childs && item.childs.length > 0) {
                 that.setChildDom(item.childs, main, bars, false, item.element, itemBarContainer);
             }
-
-
             var el = jex.instancesManager.getIns(item.uid).element;
             itemContainer.appendChild(el);
             main.appendChild(itemContainer);
@@ -78,17 +75,15 @@ jex.define('tab', {
                 bar.innerText = item.barText;
                 itemBarContainer.appendChild(bar);
                 bars.appendChild(itemBarContainer);
+
                 //确保同一个页面的所有元素对应一个tab
+
                 isItem = false;
             }
-
-
         });
-
-
     },
-
     rendered: function () {
+        //加事件
 
 
     }
