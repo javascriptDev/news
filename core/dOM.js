@@ -37,6 +37,7 @@ jex.extend({
             dom: function () {
                 var outer = document.createElement('div');
                 outer.className = jex.prefix + 'tab';
+                outer.id = jex.prefix + 'tab';
 
                 var bar = document.createElement('div');
                 bar.className = jex.prefix + 'tab-bars';

@@ -6,7 +6,7 @@ jex.extend({
         events: [],
         Event: function (name) {
             var handlers = [];
-            var selectors = [];
+
             this.getName = function () {
                 return name;
             }
@@ -22,15 +22,12 @@ jex.extend({
             }
             this.fire = function (eventArgs) {
                 handlers.forEach(function (h) {
-                    h(eventArgs);
+
+                    h.fn(eventArgs);
                 })
             }
-            this.addEl = function (selector) {
-                selectors.push(selector);
-            }
-            this.getSelectors = function () {
-                return selectors;
-            }
+
+
         },
         getEvent: function (name) {
             var fn;
@@ -43,40 +40,17 @@ jex.extend({
             return fn;
         },
 
+        addEvent: function (event) {
+            jex.EventManager.events.push(event);
+        },
         subscribe: function (eventName, handler, selector) {
             var event = jex.EventManager.getEvent(eventName);
 
             if (!event) {
                 event = new jex.EventManager.Event(eventName);
-                jex.EventManager.events.push(event);
+                jex.EventManager.addEvent(event);
             }
-            event.addHandler(handler);
-            event.addEl(selector);
-        },
-
-        check: function (event, eventArgs) {
-
-            var result = false;
-
-            /*触发事件的必备条件(满足一个即可触发)
-             1.事件元素正好就是注册时候的 元素
-             2.事件元素是 事件元素的子元素
-             */
-
-            var selectors = event.getSelectors();
-
-            //当前点击的 元素
-            var target = eventArgs.srcElement;
-
-            //遍历所有 订阅的 元素
-            jex.each(selectors, function (item) {
-                if (jex.instancesManager.getbyAlias('viewport')[0].element.querySelector(item) == target) {
-                    //todo: 触发事件的必备条件：1.点击元素 就是 订阅事件的元素。 2.点击元素是订阅元素的子元素( 目前判断的只是第一种)
-                    result = true;
-                }
-
-            });
-            return result;
+            event.addHandler({selector: selector, fn: handler});
 
         },
         publish: function (eventName, eventArgs) {
@@ -87,9 +61,7 @@ jex.extend({
                 jex.EventManager.events.push(event);
             }
 
-            if (this.check(event, eventArgs)) {
-                event.fire();
-            }
+            event.fire(eventArgs);
         },
 
         init: function () {
