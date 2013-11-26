@@ -11,8 +11,8 @@ jex.define('controller', {
 
     init: function () {
         var that = this;
-        var contorls = this.controls;
-        jex.each(contorls, function (item, index) {
+        var controls = this.controls;
+        jex.each(controls, function (item, index) {
             var
                 type = item.type,
                 fn = item.handler,

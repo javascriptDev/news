@@ -5,6 +5,7 @@ jex.define('main', {
     alias: 'main',
     extend: 'tab',
     type: 'view',
+
     config: {
 
     },

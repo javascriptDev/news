@@ -26,7 +26,7 @@ jex.extend({
                 })
             }
             this.addEl = function (selector) {
-                selectors.push(selectors);
+                selectors.push(selector);
             }
             this.getSelectors = function () {
                 return selectors;
@@ -65,9 +65,13 @@ jex.extend({
 
             var selectors = event.getSelectors();
 
+            //当前点击的 元素
             var target = eventArgs.srcElement;
+
+            //遍历所有 订阅的 元素
             jex.each(selectors, function (item) {
-                if (item.indexOf(target.id) != -1 || jex.instancesManager.getbyAlias('viewport').element.querySelector(item)) {
+                if (jex.instancesManager.getbyAlias('viewport')[0].element.querySelector(item) == target) {
+                    //todo: 触发事件的必备条件：1.点击元素 就是 订阅事件的元素。 2.点击元素是订阅元素的子元素( 目前判断的只是第一种)
                     result = true;
                 }
 

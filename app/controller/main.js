@@ -6,22 +6,25 @@ jex.define('main', {
     view: 'main',
     type: 'ctl',
     alias: 'main',
-    contorls: [
+    controls: [
         {
             selector: '#a',
             type: 'tap',
-            handler: function () {
-                alert(1);
-            }
+            handler: 'aTap'
         },
         {
             selector: '#b',
             type: 'tap',
-            handler: function () {
-                alert(2);
-            }
+            handler: 'bTap'
         }
-    ]
+    ],
+
+    aTap: function () {
+        alert(1);
+    },
+    bTap: function () {
+        alert(2);
+    }
 
 
 })

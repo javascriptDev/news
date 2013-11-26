@@ -314,11 +314,9 @@
                     if (item.length > 0) {
                         jex.each(item, function (o, index) {
                             fn += '{';
-                            jex.each(o, function (obj, key) {
-                                if (jex.isFunction(obj)) {
-                                    func.push({key: key, fn: obj});
-                                } else if (jex.isString(obj)) {
-                                    fn += key + ':"' + obj + '",';
+                            jex.each(o, function (obj, key1) {
+                                if (jex.isString(obj)) {
+                                    fn += key1 + ':"' + obj + '",';
                                 }
                             });
                             fn = fn.substr(0, fn.length - 1);
@@ -329,6 +327,8 @@
                         fn = fn.substr(0, fn.length - 1);
                     }
                     fn += '];}';
+                } else if (jex.isFunction(item)) {
+                    func.push({key: key, fn: item});
                 }
             });
 
@@ -381,7 +381,16 @@
             }
 
             //添加类
-            jex.classManager.addClass(fn, opt.type);
+            //获取 父类
+            var parentClass = (opt.extend == 'undefined' ? null : jex.classManager.getClass(opt.extend, opt.type));
+
+            //实现继承
+            var subclass = jex.generateConstructor(opt);
+            if (parentClass) {
+                subclass = jex.inherit(subclass, parentClass);
+            }
+
+            jex.classManager.addClass(subclass, opt.type);
 
             //设置对象的唯一ID
             opt.uid = Math.floor(Math.random() * Math.random() * 10000000) + '';
@@ -488,6 +497,13 @@
                     item.beforeRender();
                 }
             });
+            jex.each(jex.classManager.constructors.ctl, function (item, index) {
+                if (item.prototype.__proto__.constructor.name != 'Object') {
+                    new item().init();
+                }
+            });
+
+
             function addMeta(name, content) {
                 var meta = document.createElement('meta');
 
