@@ -303,11 +303,36 @@
          * 3.解析 字符串
          * */
         generateCtlContructor: function (o) {
+            var fn = 'var tem=function(){';
+            var func = [];
+
+            jex.each(o, function (item, key) {
+                if (jex.isString(item)) {
+                    fn += 'this.' + key + '="' + item + '";';
+                } else if (jex.isArray(item)) {//需要添加事件的控件
+                    fn += 'this.' + key + '=[';
+                    jex.each(item, function (o, index) {
+                        fn += '{';
+                        jex.each(o, function (obj, key) {
+                            fn += key + ':"' + obj + '",';
+                        });
+                        fn.substr(0, fn.length - 1);
+                        fn += '},'
+
+                    });
+                    fn.substr(0, fn.length - 1);
+                    fn += ']}';
+                }
+            });
+            eval(fn);
+
+            return tem;
 
         },
 
-        generateConstructor: function (o, type) {
+        generateConstructor: function (o) {
 
+            var type = o.type;
             switch (type) {
                 case 'view':
                     jex.generateViewConstructor(o);
@@ -338,7 +363,7 @@
          */
         define: function (name, opt) {
             //生成构造函数
-            var fn = jex.generateViewConstructor(opt);
+            var fn = jex.generateConstructor(opt);
             if (!opt.type) {
                 opt.type = 'view';
             }
@@ -380,7 +405,7 @@
             var parentClass = (model.extend == 'undefined' ? null : jex.classManager.getClass(model.extend, options.type));
 
             //实现继承
-            var subclass = jex.generateViewConstructor(model);
+            var subclass = jex.generateConstructor(model);
             if (parentClass) {
                 subclass = jex.inherit(subclass, parentClass);
             }
