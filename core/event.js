@@ -21,7 +21,7 @@ jex.extend({
             }
             this.fire = function (eventArgs) {
                 handlers.forEach(function (h) {
-                    if (h.selector.indexOf('#' + eventArgs.srcElement.id) != -1) {
+                    if (h.selector.indexOf('#' + eventArgs.srcElement.id) != -1 && eventArgs.srcElement.id != '') {
                         //todo:触发事件的条件：1.点击元素就是 注册事件的元素 。2 点击元素是 注册事件元素的子元素( 目前只做了1)；
                         h.fn(eventArgs);
                     }

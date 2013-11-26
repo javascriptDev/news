@@ -7,15 +7,14 @@ jex.define('tab', {
     isComponet: 'true',
 
     _items: [],
-    getItems: function () {
-        return jex.instancesManager.getbyAlias(this.alias).childs;
-    },
+
     ready: function () {
 
 
     },
 
-
+    getTab: function () {
+    },
     beforeRender: function () {
         var items = this.childs;
 
