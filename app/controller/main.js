@@ -5,6 +5,7 @@ jex.define('main', {
     extend: 'controller',
     view: 'main',
     type: 'ctl',
+    alias: 'main',
     contorls: [
         {
             selector: '#a',

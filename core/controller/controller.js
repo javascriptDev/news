@@ -4,7 +4,10 @@
 jex.define('controller', {
     type: 'ctl',
     view: '',
+    alias: 'controller',
+
     controls: [],
+
 
     init: function () {
         var that = this;

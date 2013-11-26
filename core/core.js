@@ -303,7 +303,7 @@
          * 3.解析 字符串
          * */
         generateCtlContructor: function (o) {
-            var fn = 'var tem=function(){';
+            var fn = 'var tem=function ' + o.alias + '(){';
             var func = [];
 
             jex.each(o, function (item, key) {
@@ -311,34 +311,47 @@
                     fn += 'this.' + key + '="' + item + '";';
                 } else if (jex.isArray(item)) {//需要添加事件的控件
                     fn += 'this.' + key + '=[';
-                    jex.each(item, function (o, index) {
-                        fn += '{';
-                        jex.each(o, function (obj, key) {
-                            fn += key + ':"' + obj + '",';
-                        });
-                        fn.substr(0, fn.length - 1);
-                        fn += '},'
+                    if (item.length > 0) {
+                        jex.each(item, function (o, index) {
+                            fn += '{';
+                            jex.each(o, function (obj, key) {
+                                if (jex.isFunction(obj)) {
+                                    func.push({key: key, fn: obj});
+                                } else if (jex.isString(obj)) {
+                                    fn += key + ':"' + obj + '",';
+                                }
+                            });
+                            fn = fn.substr(0, fn.length - 1);
+                            fn += '},'
 
-                    });
-                    fn.substr(0, fn.length - 1);
-                    fn += ']}';
+                        });
+
+                        fn = fn.substr(0, fn.length - 1);
+                    }
+                    fn += '];}';
                 }
             });
+
+            //生成构造函数
             eval(fn);
 
-            return tem;
+            //给原型加函数
+            jex.each(func, function (item, index) {
+                tem.prototype[item.key] = item.fn;
+            });
 
+            return tem;
         },
 
         generateConstructor: function (o) {
-
+            var constructor;
             var type = o.type;
             switch (type) {
                 case 'view':
-                    jex.generateViewConstructor(o);
+                    constructor = jex.generateViewConstructor(o);
                     break;
                 case 'ctl':
-                    jex.generateCtlContructor(o);
+                    constructor = jex.generateCtlContructor(o);
                     break;
                 case 'store':
                     ;
@@ -348,9 +361,8 @@
                     break;
                 default:
                     break;
-
-
             }
+            return constructor;
 
         },
 
