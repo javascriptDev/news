@@ -6,7 +6,6 @@ jex.extend({
         events: [],
         Event: function (name) {
             var handlers = [];
-
             this.getName = function () {
                 return name;
             }
@@ -22,12 +21,12 @@ jex.extend({
             }
             this.fire = function (eventArgs) {
                 handlers.forEach(function (h) {
-
-                    h.fn(eventArgs);
+                    if (h.selector.indexOf('#' + eventArgs.srcElement.id) != -1) {
+                        //todo:触发事件的条件：1.点击元素就是 注册事件的元素 。2 点击元素是 注册事件元素的子元素( 目前只做了1)；
+                        h.fn(eventArgs);
+                    }
                 })
             }
-
-
         },
         getEvent: function (name) {
             var fn;
