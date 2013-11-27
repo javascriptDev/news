@@ -3,17 +3,19 @@
  */
 jex.extend({
 
-    animate: function (el, direction, distance) {
+    animate: function (el, direction, distance, afterAnimation) {
 
         var s = el.style;
+        s.webkitTransition = '-webkit-transform 1s';
+        s.webkitTransform = 'translate3d(' + distance + 'px,0,0)';
 
-        var dis = distance;
-        if (distance == 'left') {
-            dis = (-dis);
+        var after = function () {
+            if (jex.isFunction(afterAnimation)) {
+                afterAnimation();
+                el.removeEventListener("webkitTransitionEnd", after);
+            }
         }
 
-
-        s.webkitTransition = '-webkit-transform 1s';
-        s.webkitTransform = 'translate3d(' + dis + 'px,0,0)';
+        el.addEventListener("webkitTransitionEnd", after, false);
     }
 })

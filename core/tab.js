@@ -5,13 +5,8 @@ jex.define('tab', {
     alias: 'tab',
     type: 'view',
     isComponet: 'true',
-
-
     ready: function () {
-
-
     },
-
     getTab: function () {
     },
     beforeRender: function () {
@@ -31,6 +26,7 @@ jex.define('tab', {
         if (this.id) {
             this.element.id = this.id;
         }
+        this.currentIndex = 0;
 
         jex.each(items, function (item, index) {
             that.setChildDom(item, main, bars, isItem);
@@ -89,6 +85,17 @@ jex.define('tab', {
             }
         });
     },
+
+    beforeTurn: function (index) {
+        console.log('1');
+
+    },
+    turned: function (item) {
+
+        this.currentIndex = item.index;
+        console.log('end' + this.currentIndex);
+
+    },
     rendered: function () {
 
         var that = this;
@@ -98,15 +105,23 @@ jex.define('tab', {
         for (var i = 0, len = this.bars.length; i < len; i++) {
             items.push({
                 content: that.contents[i],
-                bar: that.bars[i]
+                bar: that.bars[i],
+                index: i
             });
 
-            //加事件
-            jex.EventManager.subscribe('tab', function () {
-                alert(11);
-            }, '#' + that.bars[i].id);
+            //tab 加点击事件
+            (function (index) {
+                jex.EventManager.subscribe('tab', function () {
+                    that.beforeTurn();
+                    var distance = (index - that.currentIndex) * that.contents[index].offsetWidth;
 
+                    jex.animate(that.contents[index], distance, function () {
+                        that.turned(that.getItem(index));
 
+                    });
+
+                }, '#' + that.bars[index].id);
+            }(i))
         }
 
         //设置 公用方法 获取 tab  的 Item
@@ -117,9 +132,5 @@ jex.define('tab', {
                 return items[index];
             }
         }
-
-
     }
-
-
 })
