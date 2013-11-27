@@ -19,13 +19,6 @@ body, html {
     background: green;
 }
 
-.jex-component-titlebar {
-    height: 30px;
-    width: 100%;
-    background: deepskyblue;
-    color: white;
-}
-
 .app-main {
     height: 100%;
     width: 100%;

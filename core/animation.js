@@ -3,7 +3,7 @@
  */
 jex.extend({
 
-    animate: function (el, direction, distance, afterAnimation) {
+    animate: function (el, distance, afterAnimation) {
 
         var s = el.style;
         s.webkitTransition = '-webkit-transform 1s';

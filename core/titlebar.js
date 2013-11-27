@@ -14,7 +14,11 @@ jex.define('titlebar', {
     },
     beforeRender: function () {
 
-        this.element.innerText = this.text;
+        var text = document.createElement('div');
+        text.className = jex.prefix + 'titlebar-text';
+        text.innerText = this.text;
+        this.element.appendChild(text);
+
 
         jex.instancesManager.update(this);
     }

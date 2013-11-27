@@ -15,8 +15,14 @@ jex.define('main', {
             items: [
                 {
                     alias: 'titlebar',
-                    text: 'news'
-
+                    text: 'news',
+                    items: [
+                        {
+                            alias: 'button',
+                            text: 'add',
+                            align: 'left'
+                        }
+                    ]
                 },
                 {
                     alias: 'panel',
@@ -45,14 +51,14 @@ jex.define('main', {
                             align: 'right'
                         }
                     ]
+                },
+                {
+                    alias: 'panel',
+                    text: 'asdasd'
                 }
             ]
         }
     ],
     ready: function () {
-
-
     }
-
-
 });

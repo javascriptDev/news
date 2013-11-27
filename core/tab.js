@@ -10,6 +10,7 @@ jex.define('tab', {
     getTab: function () {
     },
     beforeRender: function () {
+
         var items = this.childs;
 
         var that = this;
@@ -27,6 +28,10 @@ jex.define('tab', {
             this.element.id = this.id;
         }
         this.currentIndex = 0;
+        this.lastIndex = 0;
+
+        //设置默认显示第一个 tab
+
 
         jex.each(items, function (item, index) {
             that.setChildDom(item, main, bars, isItem);
@@ -38,8 +43,55 @@ jex.define('tab', {
         this.element.appendChild(bars);
         jex.instancesManager.update(this);
 
-        this.bars = bars.childNodes;
-        this.contents = main.childNodes;
+        var bar = bars.childNodes;
+        var contents = main.childNodes;
+
+        var items = [];
+        //设置item 对象，每个 item 包含 内容和 tab元素
+        for (var i = 0, len = bar.length; i < len; i++) {
+            items.push({
+                content: contents[i],
+                bar: bar[i],
+                index: i
+            });
+
+            //tab 加点击事件
+            (function (index) {
+                jex.EventManager.subscribe('tab', function () {
+                    var item = that.getItem(index);
+                    if (this.currentIndex != item.index) {
+                        that.beforeTurn(item);
+                        //移动当前要显示的item 的 位置
+
+                        var distance = that.getItem(0).content.offsetWidth;
+
+                        jex.animate(that.getItem(that.lastIndex).content, that.currentIndex < that.lastIndex ? -distance : distance);
+
+                        //移动完之后，把上一页面 left 归0
+                        jex.animate(that.getItem(that.currentIndex).content, 0, function () {
+                            var el = that.getItem(that.lastIndex).content;
+                            jex.animate(el, 0);
+                            el.style.zIndex = 0;
+                        });
+                    }
+                }, '#' + bar[index].id);
+            }(i));
+        }
+
+        //设置 公用方法 获取 tab  的 Item
+        this.getItem = function (index) {
+            if (!jex.isNumber(index)) {
+                return items;
+            } else {
+                return items[index];
+            }
+        }
+
+        //设置默认 第一个item 显示出来
+
+        this.getItem(0).content.style.zIndex = 1;
+
+
     },
 
     /*
@@ -86,51 +138,44 @@ jex.define('tab', {
         });
     },
 
-    beforeTurn: function (index) {
-        console.log('1');
+    beforeTurn: function (item) {
+
+        var that = this;
+        //更改当前item的 index
+
+        this.lastIndex = this.currentIndex;
+        this.currentIndex = item.index;
+
+        //移动当前要显示的item 的 位置
+
+        var distance = that.getItem(0).content.offsetWidth;
+
+
+        var el = this.getItem(this.currentIndex).content;
+
+        /*
+         * 动画的逻辑
+         *
+         * 1.把点击 tab 相对应的 item 移动到当前显示的 item 左边或者右边
+         * 2.移动当前显示的item 和 即将显示的item。
+         * 3.显示即将显示的item,隐藏之前显示的item
+         */
+        jex.animate(el, that.currentIndex < that.lastIndex ? distance : -distance, function () {
+            el.style.zIndex = 1;
+        });
 
     },
     turned: function (item) {
-
         this.currentIndex = item.index;
         console.log('end' + this.currentIndex);
-
     },
     rendered: function () {
 
         var that = this;
 
-        var items = [];
-        //设置item 对象，每个 item 包含 内容和 tab元素
-        for (var i = 0, len = this.bars.length; i < len; i++) {
-            items.push({
-                content: that.contents[i],
-                bar: that.bars[i],
-                index: i
-            });
 
-            //tab 加点击事件
-            (function (index) {
-                jex.EventManager.subscribe('tab', function () {
-                    that.beforeTurn();
-                    var distance = (index - that.currentIndex) * that.contents[index].offsetWidth;
+        //设置公用属性
 
-                    jex.animate(that.contents[index], distance, function () {
-                        that.turned(that.getItem(index));
 
-                    });
-
-                }, '#' + that.bars[index].id);
-            }(i))
-        }
-
-        //设置 公用方法 获取 tab  的 Item
-        this.getItem = function (index) {
-            if (!index) {
-                return items;
-            } else {
-                return items[index];
-            }
-        }
     }
 })

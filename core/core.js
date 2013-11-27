@@ -60,6 +60,9 @@
         },
         isDom: function (o) {
             return o && o instanceof HTMLElement;
+        },
+        isNumber: function (o) {
+            return o != undefined && Object.prototype.toString.call(o) == '[object Number]';
         }
     })
 
