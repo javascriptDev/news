@@ -2,7 +2,7 @@
     height: 40px;
     line-height: 40px;
     display: block;
-
+    position: fixed;
     vertical-align: middle;
     text-align: center;
 

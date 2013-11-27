@@ -23,7 +23,6 @@ jex.define('main', {
             handler: 'add'
         }
     ],
-
     aTap: function () {
         alert(1);
     },
@@ -33,7 +32,4 @@ jex.define('main', {
     add: function () {
         alert(3);
     }
-
-
-
 })

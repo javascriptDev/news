@@ -27,7 +27,15 @@ jex.define('main', {
                 },
                 {
                     alias: 'panel',
-                    text: 'panel1'
+                    text: 'panel1',
+                    items: [
+                        {
+                            alias: 'list',
+                            model: '',
+                            store: '',
+                            tpl: ''
+                        }
+                    ]
                 }
             ]
 
