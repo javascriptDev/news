@@ -27,15 +27,15 @@ jex.define('main', {
                 },
                 {
                     alias: 'panel',
-                    text: 'panel1',
-                    items: [
-                        {
-                            alias: 'list',
-                            model: '',
-                            store: '',
-                            tpl: ''
-                        }
-                    ]
+                    text: 'panel1'
+//                    items: [
+//                        {
+//                            alias: 'list',
+//                            model: '',
+//                            store: '',
+//                            tpl: ''
+//                        }
+//                    ]
                 }
             ]
 
@@ -66,6 +66,66 @@ jex.define('main', {
                     text: 'asdasd'
                 }
             ]
+        },
+        {
+            title: 'MyInfo',
+            items: [
+                {
+                    alias: 'titlebar',
+                    text: 'MyInfo',
+                    items: [
+                        {
+                            alias: 'button',
+                            text: 'add',
+                            align: 'left',
+                            id: 'add'
+                        }
+                    ]
+                },
+                {
+                    alias: 'panel',
+                    text: 'panel1'
+//                    items: [
+//                        {
+//                            alias: 'list',
+//                            model: '',
+//                            store: '',
+//                            tpl: ''
+//                        }
+//                    ]
+                }
+            ]
+
+        },
+        {
+            title: 'Login In',
+            items: [
+                {
+                    alias: 'titlebar',
+                    text: 'Login In',
+                    items: [
+                        {
+                            alias: 'button',
+                            text: 'add',
+                            align: 'left',
+                            id: 'add'
+                        }
+                    ]
+                },
+                {
+                    alias: 'panel',
+                    text: 'panel1'
+//                    items: [
+//                        {
+//                            alias: 'list',
+//                            model: '',
+//                            store: '',
+//                            tpl: ''
+//                        }
+//                    ]
+                }
+            ]
+
         }
     ],
     ready: function () {

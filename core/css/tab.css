@@ -9,8 +9,11 @@
 .jex-component-tab-bars {
     position: fixed;
     bottom: 0;
-    height: 50px;
+    height: 40px;
     width: 100%;
+
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
     background: brown;
     display: -webkit-box;
     -webkit-box-orient: horizontal;
@@ -21,13 +24,15 @@
 .jex-component-tabbar-item {
     display: -webkit-box;
     -webkit-box-flex: 1;
+    height: 100%;
+    line-height: 100%;
 
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #ffffff;
     padding: 0px 0px;
-    background: -moz-linear-gradient(top, #0d86cc 0%, #0d86cc);
-    background: -webkit-gradient(linear, left top, left bottom, from(#0d86cc), to(#0d86cc));
+    background: -moz-linear-gradient(top, #185f9e 0%, #29468f);
+    background: -webkit-gradient(linear, left top, left bottom, from(#185f9e), to(#29468f));
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
     border-radius: 0px;
@@ -42,7 +47,7 @@
 .jex-component-tab-bar-inner {
     text-align: center;
     height: 100%;
-    line-height: 50px;
+    line-height: 40px;
     width: 100%;
 }
 
@@ -59,6 +64,18 @@
 
 }
 
-.jex-component-tab-main .jex-component-tab-main-item:nth-child(even) .jex-component-panel {
+.jex-component-tab-main .jex-component-tab-main-item:nth-child(1) .jex-component-panel {
     background: yellow;
+}
+
+.jex-component-tab-main .jex-component-tab-main-item:nth-child(2) .jex-component-panel {
+    background: paleturquoise;
+}
+
+.jex-component-tab-main .jex-component-tab-main-item:nth-child(3) .jex-component-panel {
+    background: blueviolet;
+}
+
+.jex-component-tab-main .jex-component-tab-main-item:nth-child(4) .jex-component-panel {
+    background: grey;
 }

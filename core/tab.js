@@ -70,8 +70,9 @@ jex.define('tab', {
                         //移动完之后，把上一页面 left 归0
                         jex.animate(that.getItem(that.currentIndex).content, 0, function () {
                             var el = that.getItem(that.lastIndex).content;
-                            jex.animate(el, 0);
                             el.style.zIndex = 0;
+                            jex.animate(el, 0);
+
                         });
                     }
                 }, '#' + bar[index].id);
