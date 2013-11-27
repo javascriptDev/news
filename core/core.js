@@ -89,6 +89,7 @@
             }
             return obj;
         }
+
     });
 
 
@@ -146,19 +147,29 @@
         add: function (ins) {
             jex.instancesManager.instances.push(ins);
         },
-        getIns: function (id) {
+        getIns: function (uid) {
             var component;
-            jex.each(jex.instancesManager.instances, function (item) {
-                if (item.uid == id) {
+            jex.each(jex.instancesManager.getAll(), function (item) {
+                if (item.uid == uid) {
                     //todo: 获取想要的数据之后不能及时退出循环
                     component = item;
                 }
             })
             return component;
         },
-        deleteIns: function (id) {
+        getCmp: function (id) {
+            var component;
+            jex.each(jex.instancesManager.getAll(), function (item) {
+                if (item.element.id == id) {
+                    //todo: 获取想要的数据之后不能及时退出循环
+                    component = item;
+                }
+            })
+            return component;
+        },
+        deleteIns: function (uid) {
             jex.each(jex.instancesManager.instances, function (item, index) {
-                if (item.uid == id) {
+                if (item.uid == uid) {
                     //todo: 获取想要的数据之后不能及时退出循环
                     jex.instancesManager.instances.splice(index, 1);
                 }

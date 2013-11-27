@@ -6,7 +6,6 @@ jex.define('tab', {
     type: 'view',
     isComponet: 'true',
 
-    _items: [],
 
     ready: function () {
 
@@ -28,6 +27,10 @@ jex.define('tab', {
         var main = dom.querySelector('.' + mainCls);
         var bars = dom.querySelector('.' + bars)
         var isItem = true;
+
+        if (this.id) {
+            this.element.id = this.id;
+        }
 
         jex.each(items, function (item, index) {
             that.setChildDom(item, main, bars, isItem);
@@ -57,9 +60,11 @@ jex.define('tab', {
 
         if (isItem) {
             itemContainer = document.createElement('div');
-            itemContainer.className = jex.prefix + 'main-item';
+            itemContainer.className = jex.prefix + 'tab-main-item';
+            itemContainer.id = jex.prefix + 'tab-main-item' + jex.instancesManager.instances.length;
             itemBarContainer = document.createElement('div');
-            itemBarContainer.className = jex.prefix + 'tab-item';
+            itemBarContainer.className = jex.prefix + 'tabbar-item';
+            itemBarContainer.id = jex.prefix + 'tabbar' + jex.instancesManager.instances.length;
         }
 
         jex.each(items, function (item, index) {
@@ -72,11 +77,12 @@ jex.define('tab', {
 
             if (isItem) {
                 var bar = document.createElement('div');
-                bar.className = jex.prefix + 'tab-item-inner';
+                bar.className = jex.prefix + 'tab-bar-inner';
                 bar.innerText = item.barText;
+
                 itemBarContainer.appendChild(bar);
                 bars.appendChild(itemBarContainer);
-
+                bar.id = jex.prefix + 'tab-bar-inner' + jex.instancesManager.instances.length;
                 //确保同一个页面的所有元素对应一个tab
 
                 isItem = false;
@@ -84,14 +90,36 @@ jex.define('tab', {
         });
     },
     rendered: function () {
-        //加事件
+
+        var that = this;
+
+        var items = [];
+        //设置item 对象，每个 item 包含 内容和 tab元素
+        for (var i = 0, len = this.bars.length; i < len; i++) {
+            items.push({
+                content: that.contents[i],
+                bar: that.bars[i]
+            });
+
+            //加事件
+            jex.EventManager.subscribe('tab', function () {
+                alert(11);
+            }, '#' + that.bars[i].id);
+
+
+        }
+
+        //设置 公用方法 获取 tab  的 Item
+        this.getItem = function (index) {
+            if (!index) {
+                return items;
+            } else {
+                return items[index];
+            }
+        }
 
 
     }
-
-
-
-
 
 
 })

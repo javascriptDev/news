@@ -17,7 +17,7 @@
 
 }
 
-.jex-component-tab-item {
+.jex-component-tabbar-item {
     display: -webkit-box;
     -webkit-box-flex: 1;
     background: deepskyblue;
@@ -26,20 +26,20 @@
 
 }
 
-.jex-component-tab-item-inner {
+.jex-component-tab-bar-inner {
     text-align: center;
     height: 100%;
     line-height: 50px;
     width: 100%;
 }
 
-.jex-component-tab-main, .jex-component-main-item {
+.jex-component-tab-main-item, .jex-component-tab-main {
     width: 100%;
     height: 100%;
 
 }
 
-.jex-component-main-item {
+.jex-component-tab-main-item {
     position: absolute;
     top: 0;
     left: 0;
