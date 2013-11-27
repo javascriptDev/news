@@ -26,8 +26,7 @@ jex.define('tab', {
             bars = clsList.bars;
 
         var main = dom.querySelector('.' + mainCls);
-        var bars = dom.querySelector('.' + bars);
-
+        var bars = dom.querySelector('.' + bars)
         var isItem = true;
 
         jex.each(items, function (item, index) {
@@ -39,6 +38,9 @@ jex.define('tab', {
         this.element.appendChild(main);
         this.element.appendChild(bars);
         jex.instancesManager.update(this);
+
+        this.bars = bars.childNodes;
+        this.contents = main.childNodes;
     },
 
     /*

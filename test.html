@@ -2,18 +2,19 @@
 <html>
 <head>
     <title></title>
+    <script src="core/core.js"></script>
+    <script src="core/animation.js"></script>
 </head>
 <body>
 
-<div id="a" style="height: 200px;width: 400px;border: 1px solid red">
-    <div id="aaa" style="height: 500px;width: 100px;border: 1px solid green"></div>
+<div id="a" style="height: 100px;width: 100px;border: 1px solid red">
+
 </div>
 
 <script>
 
-    document.body.onclick = function (e) {
-        console.dir(e)
-    }
+    jex.animate(document.querySelector('#a'), 'right', 700);
+
 </script>
 </body>
 </html>
