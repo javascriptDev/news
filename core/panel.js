@@ -14,5 +14,10 @@ jex.define('panel', {
         console.log('panel-->' + dom.outerHTML);
     },
     show: function () {
+
+    },
+    beforeRender: function () {
+
+
     }
 })

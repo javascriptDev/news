@@ -2,25 +2,23 @@
 <html>
 <head>
     <title></title>
-    <script src="core/core.js"></script>
-    <script src="core/animation.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
-<div id="a" style="height: 100px;width: 100px;border: 1px solid red">
+<div class="a"
+     style="width: 100%; border:2px solid black;height: 100px;display: -webkit-box;-webkit-box-align:center;-webkit-box-pack:center; -webkit-box-orient:horizontal;">
+
+    <div style="width: 100px;height: 80% ;background: red;"></div>
+    <div style="width: 100px;height: 80% ;background: green;"></div>
 
 </div>
 
-<script>
 
-    jex.animate(document.querySelector('#a'), 'right', 700);
-    var a = 0;
-    for (var i = 0; i < 10; i++) {
-        a = i;
-        console.log(a);
-    }
-
-
-</script>
 </body>
 </html>

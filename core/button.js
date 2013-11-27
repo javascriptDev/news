@@ -11,7 +11,7 @@ jex.define('button', {
         console.log('button-->' + this.element.outerHTML);
     },
     beforeRender: function () {
-        this.element.innerText = this.text || 'undefined';
+
 
         var align = this.align || left;
         if (this.id) {
@@ -19,7 +19,12 @@ jex.define('button', {
         }
         this.element.className += ' button-align-' + align;
 
+        var btnInner = document.createElement('div');
+        btnInner.className = jex.prefix + 'button-inner';
+        btnInner.id = jex.prefix + 'button-inner' + Math.floor(Math.random() * 10000);
+        btnInner.innerText = this.text || 'undefined';
 
+        this.element.appendChild(btnInner);
         jex.instancesManager.update(this);
     }
 

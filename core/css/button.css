@@ -1,13 +1,21 @@
 .jex-component-button {
-    height: 70%;
+    height: 100%;
 
     display: -webkit-box;
     max-width: 100px;;
-    line-height: 80%;
-
+    line-height: 100%;
+    padding: 0 5px;
     -webkit-box-align: center;
     -webkit-box-pack: center;
 
+}
+
+.jex-component-button-inner {
+    display: -webkit-box;
+    height: 60%;
+    line-height: 60%;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
     font-family: Arial, Helvetica, sans-serif;
 
     color: #ffffff;
@@ -22,15 +30,14 @@
     -webkit-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px rgba(255, 255, 255, 0.5);
     box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px rgba(255, 255, 255, 0.5);
     text-shadow: 0px -1px 0px rgba(000, 000, 000, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.3);
-
 }
 
 .button-align-left {
-    display: -webkit-box;
+    float: left;
 
 }
 
 .button-align-right {
-    display: -webkit-box;
+    float: right;
 
 }

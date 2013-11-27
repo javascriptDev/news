@@ -16,6 +16,11 @@ jex.define('main', {
             selector: '#b',
             type: 'tap',
             handler: 'bTap'
+        },
+        {
+            selector: '#add',
+            type: 'tap',
+            handler: 'add'
         }
     ],
 
@@ -24,7 +29,11 @@ jex.define('main', {
     },
     bTap: function () {
         alert(2);
+    },
+    add: function () {
+        alert(3);
     }
+
 
 
 })
