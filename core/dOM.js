@@ -81,5 +81,8 @@ jex.extend({
             }
         });
         return info;
+    },
+    getCmp: function (id) {
+        return jex.instancesManager.getIns(id);
     }
 }, jex.html);

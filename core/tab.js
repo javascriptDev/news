@@ -61,10 +61,10 @@ jex.define('tab', {
         if (isItem) {
             itemContainer = document.createElement('div');
             itemContainer.className = jex.prefix + 'tab-main-item';
-            itemContainer.id = jex.prefix + 'tab-main-item' + jex.instancesManager.instances.length;
+            itemContainer.id = jex.prefix + 'tab-main-item' + Math.floor(Math.random() * 10000);
             itemBarContainer = document.createElement('div');
             itemBarContainer.className = jex.prefix + 'tabbar-item';
-            itemBarContainer.id = jex.prefix + 'tabbar' + jex.instancesManager.instances.length;
+            itemBarContainer.id = jex.prefix + 'tabbar' + Math.floor(Math.random() * 10000);
         }
 
         jex.each(items, function (item, index) {
@@ -82,7 +82,7 @@ jex.define('tab', {
 
                 itemBarContainer.appendChild(bar);
                 bars.appendChild(itemBarContainer);
-                bar.id = jex.prefix + 'tab-bar-inner' + jex.instancesManager.instances.length;
+                bar.id = jex.prefix + 'tab-bar-inner' + Math.floor(Math.random() * 10000);
                 //确保同一个页面的所有元素对应一个tab
 
                 isItem = false;
