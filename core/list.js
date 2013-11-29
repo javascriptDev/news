@@ -16,6 +16,14 @@ jex.define('list', {
     clearList: function () {
     },
     getItem: function () {
+    },
+
+    beforeRender: function () {
+        var store = this.store;
+        var model = this.model;
+        var tpl = this.tpl;
+
+
     }
 
 })

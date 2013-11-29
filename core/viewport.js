@@ -7,6 +7,9 @@ jex.define('viewport', {
     isComponet: 'true',
     config: {
     },
+    getType: function () {
+        return 'view';
+    },
     parent: document.body,
     ready: function () {
         console.log('viewport');

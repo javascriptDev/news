@@ -44,6 +44,7 @@ jex.define('tab', {
         this.element.appendChild(bars);
         jex.instancesManager.update(this);
 
+        // 获取所有的bar和内容
         var bar = bars.childNodes;
         var contents = main.childNodes;
 
@@ -60,8 +61,6 @@ jex.define('tab', {
             (function (index) {
                 jex.EventManager.subscribe('tab', function () {
                     var item = that.getItem(index);
-
-
                     if (that.currentIndex != item.index) {
                         that.beforeTurn(item, function () {
                             //移动当前要显示的item 的 位置
