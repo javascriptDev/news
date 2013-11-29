@@ -9,9 +9,14 @@ jex.define('store', {
     init: function () {
         var opt = this.config,
             url = opt.url,
-            dataType = opt.dataType;
+            dataType = opt.dataType,
+            params = opt.params;
+
+        var that = this;
+        jex.ajax(opt, function (data) {
+            that.data = data;
+        });
 
 
     }
-
 })
