@@ -9,7 +9,7 @@ jex.extend({
         if (!jex.isNumber(seconds) || seconds == undefined) {
             seconds = 1;
         }
-        s.webkitTransition = '-webkit-transform ' + seconds + 's cubic-bezier(0,.53,0,.99)';
+        s.webkitTransition = '-webkit-transform ' + seconds + 's cubic-bezier(0,1,0,1)';
         s.webkitTransform = 'translate3d(' + distance + 'px,0,0)';
 
         var after = function () {

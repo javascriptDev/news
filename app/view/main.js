@@ -108,7 +108,7 @@ jex.define('main', {
                             alias: 'button',
                             text: 'add',
                             align: 'left',
-                            id: 'add'
+                            id: 'login'
                         }
                     ]
                 },

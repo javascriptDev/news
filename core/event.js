@@ -66,8 +66,11 @@ jex.extend({
         init: function () {
 
             document.body.onclick = function (e) {
-                jex.EventManager.publish('tap', e);
-                jex.EventManager.publish('tab', e);
+                e.fire = e.srcElement.getAttribute('fire') || e.srcElement.parentNode.getAttribute('fire') || e.srcElement.parentNode.parentNode.getAttribute('fire');
+                if (e.fire) {
+                    jex.EventManager.publish('tap', e);
+                    jex.EventManager.publish('tab', e);
+                }
             }
 
 

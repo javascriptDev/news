@@ -29,6 +29,7 @@ jex.define('tab', {
         }
         this.currentIndex = 0;
         this.lastIndex = 0;
+        this.statues = '';
 
         //设置默认显示第一个 tab
 
@@ -59,9 +60,12 @@ jex.define('tab', {
             (function (index) {
                 jex.EventManager.subscribe('tab', function () {
                     var item = that.getItem(index);
-                    if (this.currentIndex != item.index) {
+
+
+                    if (that.currentIndex != item.index) {
                         that.beforeTurn(item, function () {
                             //移动当前要显示的item 的 位置
+                            that.statues = 'turning';
                             var distance = that.getItem(0).content.offsetWidth;
                             var lastItem = that.getItem(that.lastIndex).content;
 
@@ -72,7 +76,9 @@ jex.define('tab', {
                             });
 
                             //移动当前要显示的元素到视觉窗口
-                            jex.animate(that.getItem(that.currentIndex).content, 0);
+                            jex.animate(that.getItem(that.currentIndex).content, 0, function () {
+                                that.statues = 'turned';
+                            });
                         });
                     }
                 }, '#' + bar[index].id);
@@ -113,6 +119,9 @@ jex.define('tab', {
             itemBarContainer = document.createElement('div');
             itemBarContainer.className = jex.prefix + 'tabbar-item';
             itemBarContainer.id = jex.prefix + 'tabbar' + Math.floor(Math.random() * 10000);
+
+            //设置fire属性 使其可以触发事件  。 /false 则屏蔽事件
+            itemBarContainer.setAttribute('fire', true);
         }
 
         jex.each(items, function (item, index) {
@@ -128,6 +137,7 @@ jex.define('tab', {
                 bar.className = jex.prefix + 'tab-bar-inner';
                 bar.innerText = item.barText;
 
+
                 itemBarContainer.appendChild(bar);
                 bars.appendChild(itemBarContainer);
                 bar.id = jex.prefix + 'tab-bar-inner' + Math.floor(Math.random() * 10000);
@@ -142,6 +152,7 @@ jex.define('tab', {
 
         var that = this;
         //更改当前item的 index
+        this.statues = 'before';
 
         this.lastIndex = this.currentIndex;
         this.currentIndex = item.index;

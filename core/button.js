@@ -5,7 +5,9 @@
 jex.define('button', {
     alias: 'button',
     extend: 'panel',
-    config: {},
+    config: {
+        fire: true
+    },
     type: 'view',
     ready: function () {
         console.log('button-->' + this.element.outerHTML);
@@ -23,6 +25,7 @@ jex.define('button', {
         btnInner.className = jex.prefix + 'button-inner';
         btnInner.id = jex.prefix + 'button-inner' + Math.floor(Math.random() * 10000);
         btnInner.innerText = this.text || 'undefined';
+        btnInner.setAttribute('fire', this.config.fire || this.fire);
 
         this.element.appendChild(btnInner);
         jex.instancesManager.update(this);

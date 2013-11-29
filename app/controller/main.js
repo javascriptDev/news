@@ -21,6 +21,11 @@ jex.define('main', {
             selector: '#add',
             type: 'tap',
             handler: 'add'
+        },
+        {
+            selector: '#login',
+            type: 'tap',
+            handler: 'add'
         }
     ],
     aTap: function () {
