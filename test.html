@@ -11,14 +11,31 @@
 </head>
 <body>
 
-<div class="a"
-     style="width: 100%; border:2px solid black;height: 100px;display: -webkit-box;-webkit-box-align:center;-webkit-box-pack:center; -webkit-box-orient:horizontal;">
 
-    <div style="width: 100px;height: 80% ;background: red;"></div>
-    <div style="width: 100px;height: 80% ;background: green;"></div>
+<script>
 
-</div>
+    function Promise(fn) {
+        this.fn = fn;
+        fn();
 
+        //默认设置状态为ok。 以便调用成功函数
+        return this;
+    }
+
+    Promise.prototype.ok = function (fn) {
+        if (this.ok == true) {
+            fn();
+        }
+    }
+
+    new Promise(function () {
+        alert(1);
+    }).complete(function () {
+                alert(2);
+            })
+
+
+</script>
 
 </body>
 </html>

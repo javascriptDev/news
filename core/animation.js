@@ -3,10 +3,13 @@
  */
 jex.extend({
 
-    animate: function (el, distance, afterAnimation) {
+    animate: function (el, distance, afterAnimation, seconds) {
 
         var s = el.style;
-        s.webkitTransition = '-webkit-transform 1s cubic-bezier(0,.53,0,.99)';
+        if (!jex.isNumber(seconds) || seconds == undefined) {
+            seconds = 1;
+        }
+        s.webkitTransition = '-webkit-transform ' + seconds + 's cubic-bezier(0,.53,0,.99)';
         s.webkitTransform = 'translate3d(' + distance + 'px,0,0)';
 
         var after = function () {

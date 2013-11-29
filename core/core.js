@@ -555,7 +555,11 @@
                     }
                 });
 
+                //初始化事件
                 jex.EventManager.init();
+
+                //初始化 Promise
+                jex.initPromise();
 
             }, false);
         }

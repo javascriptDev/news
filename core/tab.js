@@ -60,19 +60,19 @@ jex.define('tab', {
                 jex.EventManager.subscribe('tab', function () {
                     var item = that.getItem(index);
                     if (this.currentIndex != item.index) {
-                        that.beforeTurn(item);
-                        //移动当前要显示的item 的 位置
+                        that.beforeTurn(item, function () {
+                            //移动当前要显示的item 的 位置
+                            var distance = that.getItem(0).content.offsetWidth;
+                            var lastItem = that.getItem(that.lastIndex).content;
 
-                        var distance = that.getItem(0).content.offsetWidth;
+                            //移动上一页完之后，把上一页面 left 归0
+                            jex.animate(lastItem, that.currentIndex < that.lastIndex ? -distance : distance, function () {
+                                lastItem.style.zIndex = 0;
+                                jex.animate(lastItem, 0);
+                            });
 
-                        jex.animate(that.getItem(that.lastIndex).content, that.currentIndex < that.lastIndex ? -distance : distance);
-
-                        //移动完之后，把上一页面 left 归0
-                        jex.animate(that.getItem(that.currentIndex).content, 0, function () {
-                            var el = that.getItem(that.lastIndex).content;
-                            el.style.zIndex = 0;
-                            jex.animate(el, 0);
-
+                            //移动当前要显示的元素到视觉窗口
+                            jex.animate(that.getItem(that.currentIndex).content, 0);
                         });
                     }
                 }, '#' + bar[index].id);
@@ -89,7 +89,6 @@ jex.define('tab', {
         }
 
         //设置默认 第一个item 显示出来
-
         this.getItem(0).content.style.zIndex = 1;
 
 
@@ -139,7 +138,7 @@ jex.define('tab', {
         });
     },
 
-    beforeTurn: function (item) {
+    beforeTurn: function (item, fn) {
 
         var that = this;
         //更改当前item的 index
@@ -163,7 +162,10 @@ jex.define('tab', {
          */
         jex.animate(el, that.currentIndex < that.lastIndex ? distance : -distance, function () {
             el.style.zIndex = 1;
-        });
+            if (jex.isFunction(fn)) {
+                fn();
+            }
+        }, 0.16);
 
     },
     turned: function (item) {
