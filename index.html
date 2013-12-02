@@ -2,6 +2,8 @@
 <html>
 <head>
     <title></title>
+
+    <!--框架js-->
     <script src="core/core.js"></script>
     <script src="core/event.js"></script>
     <script src="core/DOM.js"></script>
@@ -15,14 +17,19 @@
     <script src="core/button.js"></script>
     <script src="core/controller/controller.js"></script>
     <script src="core/model/model.js"></script>
-
     <script src="core/store/store.js"></script>
+    <script src="core/Ajax.js"></script>
+    <script src="core/store/storeMgr.js"></script>
+    <script src="core/list.js"></script>
 
-    <!--<script src="core/list.js"></script>-->
 
+    <!--client js-->
+    <script src="app/model/model.js"></script>
     <script src="app/controller/main.js"></script>
+    <script src="app/store/liststore.js"></script>
 
 
+    <!--框架 css-->
     <link href="core/css/base.css" rel="stylesheet">
     <link href="core/css/tab.css" rel="stylesheet">
     <link href="core/css/title.css" rel="stylesheet">
@@ -31,6 +38,7 @@
 
     <script>
 
+        //程序入口
         jex.application({
             views: [],
             controllers: [],

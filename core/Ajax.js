@@ -12,9 +12,10 @@ jex.extend({
         }
         var url = opt.url,
             type = opt.dataType,
-            params = opt.params;
+            params = opt.params,
+            method = opt.method || 'get';
 
-        xhr.open(type, jex.ajax.generateUrl(url, params), true);
+        xhr.open(method, jex.ajax.generateUrl(url, params), true);
 
         xhr.send();
 
@@ -40,7 +41,9 @@ jex.extend({
             base += key + '=' + val + '&';
         })
 
-        base = base.substr(0, base.length - 2);
+        if (para) {
+            base = base.substr(0, base.length - 2);
+        }
 
         return base;
 

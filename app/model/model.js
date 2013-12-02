@@ -5,6 +5,8 @@ jex.define('listmodel', {
 
     alias: 'listmodel',
     type: 'model',
+    extend: 'model',
+
     fields: [
         {
             field: 'name'

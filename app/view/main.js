@@ -27,15 +27,15 @@ jex.define('main', {
                 },
                 {
                     alias: 'panel',
-                    text: 'panel1'
-//                    items: [
-//                        {
-//                            alias: 'list',
-//                            model: '',
-//                            store: '',
-//                            tpl: ''
-//                        }
-//                    ]
+                    text: 'panel1',
+                    items: [
+                        {
+                            alias: 'list',
+                            model: 'listmodel',
+                            store: 'liststore',
+                            tpl: '<div>{name}</div>'
+                        }
+                    ]
                 }
             ]
 

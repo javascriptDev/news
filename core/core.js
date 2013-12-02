@@ -288,16 +288,10 @@
                     funcArray.push({key: key, fn: item});
                 } else if (jex.isString(item)) {
                     fn += 'this.' + key + '="' + item + '";';
-                } else if (jex.isObject(item)) {
-                    var newPro = 'this.' + key + '= {};';
-                    fn += newPro;
-                    jex.each(item, function (i, k) {
-                        fn += 'this.' + key + '.' + k + '="' + i + '";';
-                    });
-                }
-                else if (jex.isArray(item)) {
+                } else if (jex.isObject(item) || jex.isArray(item)) {
                     fn += 'this.' + key + '=' + JSON.stringify(item) + ';';
                 }
+
             });
             fn += '}';
             eval(fn);
@@ -355,22 +349,28 @@
 
         generateModelConstructor: function (o) {
             var fn = 'var tem=function ' + o.alias + '(){';
+            var func = [];
 
-            jex.each(o, function (val, key) {
-
-                if (jex.isString(val)) {
-                    if (key == 'model') {
-                        fn += 'this.' + key + '=' + JSON.stringify(val) + ';';
-                    } else {
-
-                    }
-
-                } else if (jex.isObject(val)) {
-
+            jex.each(o, function (item, key) {
+                if (jex.isString(item)) {
+                    fn += 'this.' + key + '="' + item + '";';
+                } else if (jex.isArray(item)) {//需要添加事件的控件
+                    fn += 'this.' + key + '=' + JSON.stringify(item) + ';';
+                } else if (jex.isFunction(item)) {
+                    func.push({key: key, fn: item});
                 }
-
             });
 
+            fn += '}';
+            //生成构造函数
+            eval(fn);
+
+            //给原型加函数
+            jex.each(func, function (item, index) {
+                tem.prototype[item.key] = item.fn;
+            });
+
+            return tem;
         },
 
 
@@ -384,6 +384,35 @@
          * 3. 解析常规配置
          * */
         generateStoreConstructor: function (o) {
+            var fn = 'var tem=function ' + o.alias + '(){';
+            var func = [];
+            jex.each(o, function (val, key) {
+
+                if (jex.isString(val)) {
+                    if (key == 'model') {
+                        var modelFn = jex.classManager.getClass(val, 'model');
+                        var model = new modelFn();
+                        fn += 'this.' + key + '=' + JSON.stringify(model.fields) + ';';
+                    } else {
+                        fn += 'this.' + key + '="' + val + '";';
+                    }
+
+                } else if (jex.isObject(val)) {
+                    fn += 'this.' + key + '=' + JSON.stringify(val) + ';';
+                } else if (jex.isFunction(val)) {
+                    func.push({key: key, fn: val});
+                }
+
+            });
+            fn += '}';
+            //生成构造函数
+            eval(fn);
+
+            jex.each(func, function (item, index) {
+                tem.prototype[item.key] = item.fn;
+            });
+
+            return tem;
 
         },
         generateConstructor: function (o) {
@@ -492,9 +521,7 @@
             if (instance.type == 'view') {
                 instance.ready();
             }
-            if (instance.type == 'ctl') {
-                instance.init();
-            }
+
 
             //设置 对象的唯一身份 ID
             instance.uid = Math.floor(Math.random() * Math.random() * 10000000) + '';

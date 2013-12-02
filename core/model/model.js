@@ -4,6 +4,9 @@
 jex.define('model', {
     alias: 'model',
     type: 'model',
-    fields: []
+    fields: [],
+    getFields: function () {
+        return this.fields;
+    }
 
 })
