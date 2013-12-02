@@ -1,0 +1,13 @@
+.jex-component-list {
+    background: deepskyblue;
+    color: white;
+    overflow: visible;
+}
+
+.jex-component-list:nth-child(even) {
+    background: red;
+}
+
+.jex-component-list:nth-child(odd) {
+    background: green;
+}

@@ -67,7 +67,7 @@ jex.extend({
             alias: 'list',
             dom: function () {
                 var div = document.createElement('div');
-                div.classNames = jex.prefix + 'list';
+                div.className = jex.prefix + 'list';
                 div.id = jex.prefix + Math.floor(Math.random() * 10000);
 
                 return div;

@@ -72,7 +72,13 @@ jex.extend({
                     jex.EventManager.publish('tab', e);
                 }
             }
-
+            document.body.addEventListener('touchstart', function (e) {
+                e.fire = e.target.getAttribute('fire') || e.target.parentNode.getAttribute('fire') || e.target.parentNode.parentNode.getAttribute('fire');
+                if (e.fire) {
+                    jex.EventManager.publish('tap', e);
+                    jex.EventManager.publish('tab', e);
+                }
+            })
 
         }
 
