@@ -13,10 +13,12 @@ jex.define('store', {
             params = opt.params;
 
         var that = this;
-        jex.ajax(opt, function (data) {
-            that.data = data;
+        var model = jex.modelMgr.getModel(this.model);
+        jex.ajax.request(opt, function (data) {
+            jex.storeMgr.add(that.mix(model, data.responseText));
         });
-
+    },
+    mix: function (model, data) {
 
     }
 })

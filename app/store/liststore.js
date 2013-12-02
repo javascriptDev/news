@@ -7,10 +7,8 @@ jex.define('liststore', {
     extend: 'store',
 
     config: {
-        url: '',
-        dataType: ''
-
-
-
-    }
+        url: 'a.json',
+        dataType: 'josn'
+    },
+    model: 'listmodel'
 })

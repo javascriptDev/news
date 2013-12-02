@@ -13,6 +13,8 @@
 
         },
         instancesManager: {},
+        modelMgr: {},
+        storeMgr: {},
         extend: function (config, target) {
             for (var i in config) {
                 if (target) {
@@ -26,7 +28,8 @@
             show: function (text) {
                 throw  new Error(text);
             }
-        }
+        },
+        ajax: {}
     };
 
     //application 入口
@@ -65,6 +68,7 @@
             return o != undefined && Object.prototype.toString.call(o) == '[object Number]';
         }
     })
+
 
     //工具函数 (each, merge),
     jex.extend({
@@ -292,9 +296,7 @@
                     });
                 }
                 else if (jex.isArray(item)) {
-                    if (item.length == 0) {
-                        fn += 'this.' + key + '=[] ;';
-                    }
+                    fn += 'this.' + key + '=' + JSON.stringify(item) + ';';
                 }
             });
             fn += '}';
@@ -324,28 +326,13 @@
                 if (jex.isString(item)) {
                     fn += 'this.' + key + '="' + item + '";';
                 } else if (jex.isArray(item)) {//需要添加事件的控件
-                    fn += 'this.' + key + '=[';
-                    if (item.length > 0) {
-                        jex.each(item, function (o, index) {
-                            fn += '{';
-                            jex.each(o, function (obj, key1) {
-                                if (jex.isString(obj)) {
-                                    fn += key1 + ':"' + obj + '",';
-                                }
-                            });
-                            fn = fn.substr(0, fn.length - 1);
-                            fn += '},'
-
-                        });
-
-                        fn = fn.substr(0, fn.length - 1);
-                    }
-                    fn += '];}';
+                    fn += 'this.' + key + '=' + JSON.stringify(item) + ';';
                 } else if (jex.isFunction(item)) {
                     func.push({key: key, fn: item});
                 }
             });
 
+            fn += '}';
             //生成构造函数
             eval(fn);
 
@@ -357,6 +344,48 @@
             return tem;
         },
 
+
+        /*
+         * 功能: 生成 Model 构造函数
+         *
+         * 解析 配置项的 键值对
+         *
+         * 1.解析 fileds
+         * */
+
+        generateModelConstructor: function (o) {
+            var fn = 'var tem=function ' + o.alias + '(){';
+
+            jex.each(o, function (val, key) {
+
+                if (jex.isString(val)) {
+                    if (key == 'model') {
+                        fn += 'this.' + key + '=' + JSON.stringify(val) + ';';
+                    } else {
+
+                    }
+
+                } else if (jex.isObject(val)) {
+
+                }
+
+            });
+
+        },
+
+
+        /*
+         *功能： 生成 Store 构造函数
+         *
+         * 解析 配置项的 键值对
+         *
+         * 1. 解析 ajax 的参数
+         * 2. 解析model
+         * 3. 解析常规配置
+         * */
+        generateStoreConstructor: function (o) {
+
+        },
         generateConstructor: function (o) {
             var constructor;
             var type = o.type;
@@ -368,10 +397,10 @@
                     constructor = jex.generateCtlContructor(o);
                     break;
                 case 'store':
-                    ;
+                    constructor = jex.generateStoreConstructor(o);
                     break;
                 case 'model':
-                    ;
+                    constructor = jex.generateModelConstructor(o);
                     break;
                 default:
                     break;
