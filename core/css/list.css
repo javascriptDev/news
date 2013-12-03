@@ -1,37 +1,21 @@
 .jex-component-list {
     background: deepskyblue;
-    color: white;
+    color: black;
     overflow: scroll;
 }
 
-.jex-component-list div:nth-child(7n+1) {
-    background: red;
-}
-
-.jex-component-list div:nth-child(7n+2) {
-    background: green;
-}
-
-.jex-component-list div:nth-child(7n+3) {
-    background: burlywood;
-}
-
-.jex-component-list div:nth-child(7n+4) {
-    background: sienna;
-}
-
-.jex-component-list div:nth-child(7n+5) {
-    background: royalblue;
-}
-
-.jex-component-list div:nth-child(7n+6) {
-    background: hotpink;
-}
-
-.jex-component-list div:nth-child(7n+7) {
-    background: greenyellow;
-}
-
-.list-item {
+.jex-component-list div {
+    background-color: #d5d5d5;
+    box-shadow: 2px 2px 2px #bbb;
+    -webkit-box-shadow: 1px 1px 1px #ccc;
+    -moz-box-shadow: 2px 2px 2px #bbb;
+    border-style: solid;
+    border-width: thin;
+    border-color: #bfbfbf;
     height: 50px;
+    line-height: 50px;
+}
+
+::selection {
+    background-color: red;
 }
