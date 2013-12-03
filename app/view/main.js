@@ -70,15 +70,16 @@ jex.define('main', {
                         },
                         {
                             alias: 'text',
-                            label: 'name'
+                            label: 'pwd'
                         },
                         {
                             alias: 'text',
-                            label: 'name'
+                            label: 'name',
+                            placeHolder: 'asdasdas'
                         },
                         {
-                            alias: 'text',
-                            label: 'name'
+                            alias: 'password',
+                            label: 'pwd'
                         }
                     ]
                 }

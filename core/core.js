@@ -499,6 +499,10 @@
             //获取model
             if (!options) {
                 options = {type: 'view'};
+            } else {
+                if (!options.type) {
+                    options.type = 'view';
+                }
             }
             var baseModel = jex.classManager.getModel(alias, options.type);
             var model = jex.merge(baseModel, options);

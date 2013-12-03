@@ -7,13 +7,16 @@ jex.define('text', {
     placeHolder: '',
     type: 'view',
     getText: function () {
-        return this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + 'text-innertext').value;
+        return this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + this.alias + '-innertext').value;
     },
     setText: function (text) {
-        this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + 'text-innertext').value = text;
+        this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + this.alias + '-innertext').value = text;
     },
     setLabel: function (label) {
-        this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + 'text-label').innerText = label;
+        this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + this.alias + '-label').innerText = label;
+    },
+    setPlaceHolder: function (text) {
+        this.element.querySelector('#' + this.element.id + ' .' + jex.prefix + this.alias + '-innertext').setAttribute('placeholder', text);
     },
     ready: function () {
 
@@ -23,7 +26,7 @@ jex.define('text', {
         this.setLabel(this.label);
 
         if (this.placeHolder) {
-            this.setText(this.placeHolder);
+            this.setPlaceHolder(this.placeHolder);
             jex.addClass(this, 'placeholder');
         }
 

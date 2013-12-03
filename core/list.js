@@ -25,6 +25,7 @@ jex.define('list', {
                 html += tpl.replace(field, item[field.replace('{', '').replace('}', '')]);
             })
         })
+
         this.html = html;
         this.element.innerHTML = html;
 

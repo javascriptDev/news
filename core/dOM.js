@@ -84,8 +84,18 @@ jex.extend({
                 div.innerHTML = html;
                 return div;
             }
+        },
+        {
+            alias: 'password',
+            dom: function () {
+                var div = document.createElement('div');
+                div.className = jex.prefix + 'password';
+                div.id = jex.prefix + 'password' + jex.random();
+                var html = '<div class=' + jex.prefix + this.alias + '-label></div><div class=' + jex.prefix + 'password-inner><input type="password" class=' + jex.prefix + this.alias + '-innertext \/></div>';
+                div.innerHTML = html;
+                return div;
+            }
         }
-
     ],
     getDom: function (alias) {
         var dom;

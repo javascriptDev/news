@@ -19,16 +19,11 @@
     -webkit-box-orient: horizontal;
     z-index: 6;
 
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-
 }
 
 .jex-component-tabbar-item {
 
-    -webkit-flex: 1;
+    -webkit-box-flex: 1;
     height: 100%;
     line-height: 100%;
 
@@ -76,7 +71,7 @@
 }
 
 .jex-component-tab-main .jex-component-tab-main-item:nth-child(2) .jex-component-panel {
-    background: saddlebrown;
+    background: white;
 }
 
 .jex-component-tab-main .jex-component-tab-main-item:nth-child(3) .jex-component-panel {
