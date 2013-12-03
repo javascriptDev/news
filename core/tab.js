@@ -14,6 +14,7 @@ jex.define('tab', {
         this.zIndex = 5;
 
         var items = this.childs;
+        var tabCount = items.length;
 
         var that = this;
         var info = jex.html.getInfo(this.extend),
@@ -23,7 +24,7 @@ jex.define('tab', {
             bars = clsList.bars;
 
         var main = dom.querySelector('.' + mainCls);
-        var bars = dom.querySelector('.' + bars)
+        var bars = dom.querySelector('.' + bars);
         var isItem = true;
 
         if (this.id) {
@@ -97,8 +98,6 @@ jex.define('tab', {
 
         //设置默认 第一个item 显示出来
         this.getItem(0).content.style.zIndex = this.zIndex;
-
-
     },
 
     /*

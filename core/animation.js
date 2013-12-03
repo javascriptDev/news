@@ -7,7 +7,7 @@ jex.extend({
 
         var s = el.style;
         if (!jex.isNumber(seconds) || seconds == undefined) {
-            seconds = 1;
+            seconds = 0.5;
         }
         s.webkitTransition = '-webkit-transform ' + seconds + 's cubic-bezier(0,1,0,1)';
         s.webkitTransform = 'translate3d(' + distance + 'px,0,0)';

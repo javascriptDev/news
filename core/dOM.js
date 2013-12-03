@@ -73,6 +73,17 @@ jex.extend({
                 return div;
 
             }
+        },
+        {
+            alias: 'text',
+            dom: function () {
+                var div = document.createElement('div');
+                div.className = jex.prefix + 'text';
+                div.id = jex.prefix + 'text' + jex.random();
+                var html = '<div class=' + jex.prefix + 'text-label></div><div class=' + jex.prefix + 'text-inner><input type="text" class=' + jex.prefix + 'text-innertext \/></div>';
+                div.innerHTML = html;
+                return div;
+            }
         }
 
     ],

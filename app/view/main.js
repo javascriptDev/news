@@ -63,7 +63,24 @@ jex.define('main', {
                 },
                 {
                     alias: 'panel',
-                    text: 'asdasd'
+                    items: [
+                        {
+                            alias: 'text',
+                            label: 'name'
+                        },
+                        {
+                            alias: 'text',
+                            label: 'name'
+                        },
+                        {
+                            alias: 'text',
+                            label: 'name'
+                        },
+                        {
+                            alias: 'text',
+                            label: 'name'
+                        }
+                    ]
                 }
             ]
         },

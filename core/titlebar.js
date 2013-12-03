@@ -13,12 +13,7 @@ jex.define('titlebar', {
 
     },
     beforeRender: function () {
-
-//        var text = document.createElement('div');
-//        text.className = jex.prefix + 'titlebar-text';
-//        text.innerText = this.text;
         this.element.innerText = this.text;
-
         jex.instancesManager.update(this);
     }
 })

@@ -9,6 +9,9 @@
         classManager: {
 
         },
+        random: function () {
+            return Math.floor(Math.random() * 10000);
+        },
         html: {
 
         },
@@ -31,6 +34,7 @@
             }
         },
         ajax: {}
+
     };
 
     //application 入口
@@ -96,6 +100,10 @@
                 obj[i] = o[i];
             }
             return obj;
+        },
+        addClass: function (el, cls) {
+            el.className = (el.className += ' ' + cls);
+
         }
 
     });
