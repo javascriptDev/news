@@ -4,12 +4,14 @@
 jex.define('tab', {
     alias: 'tab',
     type: 'view',
+
     isComponet: 'true',
     ready: function () {
     },
     getTab: function () {
     },
     beforeRender: function () {
+        this.zIndex = 5;
 
         var items = this.childs;
 
@@ -94,7 +96,7 @@ jex.define('tab', {
         }
 
         //设置默认 第一个item 显示出来
-        this.getItem(0).content.style.zIndex = 1;
+        this.getItem(0).content.style.zIndex = this.zIndex;
 
 
     },
@@ -171,7 +173,7 @@ jex.define('tab', {
          * 3.显示即将显示的item,隐藏之前显示的item
          */
         jex.animate(el, that.currentIndex < that.lastIndex ? distance : -distance, function () {
-            el.style.zIndex = 1;
+            el.style.zIndex = that.zIndex;
             if (jex.isFunction(fn)) {
                 fn();
             }

@@ -5,7 +5,7 @@
     position: fixed;
     vertical-align: middle;
     text-align: center;
-
+    z-index: 2;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;

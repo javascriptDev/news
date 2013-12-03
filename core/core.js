@@ -12,6 +12,7 @@
         html: {
 
         },
+        queue: {},
         instancesManager: {},
         modelMgr: {},
         storeMgr: {},
@@ -286,7 +287,7 @@
             jex.each(o, function (item, key) {
                 if (jex.isFunction(item)) {
                     funcArray.push({key: key, fn: item});
-                } else if (jex.isString(item)) {
+                } else if (jex.isString(item) || jex.isNumber(item)) {
                     fn += 'this.' + key + '="' + item + '";';
                 } else if (jex.isObject(item) || jex.isArray(item)) {
                     fn += 'this.' + key + '=' + JSON.stringify(item) + ';';

@@ -33,7 +33,7 @@ jex.define('main', {
                             alias: 'list',
                             model: 'listmodel',
                             store: 'liststore',
-                            tpl: '<div>{name}</div>'
+                            tpl: '<div class=list-item>{name}</div>'
                         }
                     ]
                 }

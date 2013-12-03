@@ -12,7 +12,7 @@ jex.define('viewport', {
     },
     parent: document.body,
     ready: function () {
-        console.log('viewport');
+
     },
     render: function () {
     },

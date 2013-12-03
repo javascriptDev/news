@@ -10,7 +10,7 @@ jex.define('titlebar', {
         name: 'titlebar'
     },
     ready: function () {
-        console.log('titlebar' + this.element.outerHTML);
+
     },
     beforeRender: function () {
 

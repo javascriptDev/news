@@ -10,7 +10,7 @@ jex.define('button', {
     },
     type: 'view',
     ready: function () {
-        console.log('button-->' + this.element.outerHTML);
+
     },
     beforeRender: function () {
 
