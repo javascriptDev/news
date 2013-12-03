@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+
+<div class="a" style="width: 100px;height: 200px;background: red;"></div>
+<div class="b" style="width: 100px;height: 200px; background: green; display: none;"></div>
+
+
+<script>
+    var a = document.querySelector('.a'),
+            b = document.querySelector('.b');
+
+    var hide;
+
+
+    a.onmouseover = function () {
+        b.style.display = 'block';
+        hide = setTimeout(function () {
+            b.style.display = 'none';
+        }, 1000);
+    }
+    a.onmouseout = function () {
+        b.style.display = 'none';
+        clearTimeout(hide);
+    }
+
+    a.onmousemove = function () {
+        b.style.display = 'block';
+        hide = setTimeout(function () {
+            b.style.display = 'none';
+        }, 1000);
+    }
+
+
+</script>
+</body>
+</html>
