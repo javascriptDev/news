@@ -36,7 +36,7 @@ jex.define('main', {
 
                             tpl: '<div>{name}</div>',
                             itemTap: function (e, data, itemDom) {
-                                alert(itemDom.id);
+                                //itemDom.innerText = itemDom.innerText;
                             }
                         }
                     ]
@@ -73,17 +73,12 @@ jex.define('main', {
                             label: 'name'
                         },
                         {
-                            alias: 'text',
-                            label: 'pwd'
-                        },
-                        {
-                            alias: 'text',
-                            label: 'name',
-                            placeHolder: 'asdasdas'
-                        },
-                        {
                             alias: 'password',
                             label: 'pwd'
+                        },
+                        {
+                            alias: 'radio',
+                            text: 'sex'
                         }
                     ]
                 }

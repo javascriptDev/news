@@ -4,16 +4,21 @@
     overflow: scroll;
 }
 
+.jex-component-list div.normal {
+    background: #dfdfdf !important;
+    background-image: linear-gradient(#f6f6f6, #e0e0e0) !important;
+    border: 1px solid #bbb !important;
+
+}
+
 .jex-component-list div {
-    background-color: #d5d5d5;
     box-shadow: 2px 2px 2px #bbb;
     -webkit-box-shadow: 1px 1px 1px #ccc;
     -moz-box-shadow: 2px 2px 2px #bbb;
-    border-style: solid;
-    border-width: thin;
-    border-color: #bfbfbf;
+
     height: 50px;
     line-height: 50px;
+    font-weight: 700;
 }
 
 ::selection {
@@ -21,6 +26,8 @@
 }
 
 .jex-component-list div.itemSelected {
-    color: red;
+    color: white;
     border: 1px solid red;
+    background: red;
+    background-image: -webkit-gradient(linear, 80% 20%, 10% 21%, from(#A42800), to(#BB0028));
 }
