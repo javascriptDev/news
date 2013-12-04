@@ -19,3 +19,8 @@
 ::selection {
     background-color: red;
 }
+
+.jex-component-list div.itemSelected {
+    color: red;
+    border: 1px solid red;
+}

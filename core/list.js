@@ -19,18 +19,24 @@ jex.define('list', {
         var data = this.getData();
         var tpl = this.tpl;
         var field = tpl.match(/\{(.|\n|\r)*?\}/g);
-        var html = '';
+        var that = this;
         jex.each(data, function (item) {
-            jex.each(field, function (field) {
-                html += tpl.replace(field, item[field.replace('{', '').replace('}', '')]);
+            jex.each(field, function (text) {
+                var listitem = document.createElement('div');
+                listitem.className = jex.prefix + 'list-item';
+                listitem.id = jex.prefix + 'list-item' + jex.random();
+
+                listitem.innerHTML = tpl.replace(text, item[text.replace('{', '').replace('}', '')]);
+                listitem.setAttribute('fire', true);
+
+                listitem.querySelector('div').id = jex.prefix + 'list-item-inner' + jex.random();
+                that.element.appendChild(listitem);
             })
         })
 
-        this.html = html;
-        this.element.innerHTML = html;
-
         jex.instancesManager.update(this);
-        this.addEvent();
+        this.addScrollEvent();
+        this.itemTapEvent();
     },
     beforeRender: function () {
         var store = this.store;
@@ -48,7 +54,28 @@ jex.define('list', {
 
 
     },
-    addEvent: function () {
+    itemTapEvent: function () {
+        var that = this;
+        if (this.itemTap) {//指定了点击事件
+            var els = this.element.childNodes;
+            for (var i = 0, len = els.length; i < len; i++) {
+                (function (index) {
+                    jex.EventManager.subscribe('itemtap', function (e) {
+                        that.itemTap(e, that.getData()[index], els[index]);
+                    }, '#' + els[index].id);
+
+                    jex.EventManager.subscribe('itemtap', function () {
+
+                        els[index].className += ' itemSelected';
+                    }, '#' + els[index].id);
+                }(i))
+            }
+
+        }
+
+
+    },
+    addScrollEvent: function () {
         var el = this.element;
         var isMove = false;
         var that = this;

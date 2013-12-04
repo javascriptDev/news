@@ -70,6 +70,7 @@ jex.extend({
                 if (e.fire) {
                     jex.EventManager.publish('tap', e);
                     jex.EventManager.publish('tab', e);
+                    jex.EventManager.publish('itemtap', e);
                 }
             }
             document.body.addEventListener('touchstart', function (e) {
@@ -77,6 +78,7 @@ jex.extend({
                 if (e.fire) {
                     jex.EventManager.publish('tap', e);
                     jex.EventManager.publish('tab', e);
+                    jex.EventManager.publish('itemtap', e);
                 }
             })
 

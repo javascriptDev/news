@@ -33,7 +33,11 @@ jex.define('main', {
                             alias: 'list',
                             model: 'listmodel',
                             store: 'liststore',
-                            tpl: '<div class=list-item>{name}</div>'
+
+                            tpl: '<div>{name}</div>',
+                            itemTap: function (e, data, itemDom) {
+                                alert(itemDom.id);
+                            }
                         }
                     ]
                 }
