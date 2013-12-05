@@ -11,135 +11,37 @@ jex.define('main', {
     },
     items: [
         {
-            title: 'news',
+            title: 'News',
             items: [
                 {
-                    alias: 'titlebar',
-                    text: 'news',
-                    items: [
-                        {
-                            alias: 'button',
-                            text: 'add',
-                            align: 'left',
-                            id: 'add'
-                        }
-                    ]
-                },
-                {
-                    alias: 'panel',
-                    text: 'panel1',
-                    items: [
-                        {
-                            alias: 'list',
-                            model: 'listmodel',
-                            store: 'liststore',
+                    alias: 'index'
+                }
+            ]
 
-                            tpl: '<div>{name}</div>',
-                            itemTap: function (e, data, itemDom) {
-                                //itemDom.innerText = itemDom.innerText;
-                            }
-                        }
-                    ]
+
+        },
+        {
+            title: 'RSS',
+            items: [
+                {
+                    alias: 'rss'
+                }
+            ]
+        },
+        {
+            title: 'History',
+            items: [
+                {
+                    alias: 'history'
                 }
             ]
 
         },
         {
-            title: 'info',
+            title: 'Profile',
             items: [
                 {
-                    alias: 'titlebar',
-                    text: 'info',
-                    items: [
-                        {
-                            alias: 'button',
-                            text: 'select',
-                            id: 'a',
-                            align: 'left'
-                        },
-                        {
-                            alias: 'button',
-                            text: 'cancel',
-                            id: 'b',
-                            align: 'right'
-                        }
-                    ]
-                },
-                {
-                    alias: 'panel',
-                    items: [
-                        {
-                            alias: 'text',
-                            label: 'name'
-                        },
-                        {
-                            alias: 'password',
-                            label: 'pwd'
-                        },
-                        {
-                            alias: 'radio',
-                            text: 'sex'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            title: 'MyInfo',
-            items: [
-                {
-                    alias: 'titlebar',
-                    text: 'MyInfo',
-                    items: [
-                        {
-                            alias: 'button',
-                            text: 'add',
-                            align: 'left',
-                            id: 'add'
-                        }
-                    ]
-                },
-                {
-                    alias: 'panel',
-                    text: 'panel1'
-//                    items: [
-//                        {
-//                            alias: 'list',
-//                            model: '',
-//                            store: '',
-//                            tpl: ''
-//                        }
-//                    ]
-                }
-            ]
-
-        },
-        {
-            title: 'Login In',
-            items: [
-                {
-                    alias: 'titlebar',
-                    text: 'Login In',
-                    items: [
-                        {
-                            alias: 'button',
-                            text: 'add',
-                            align: 'left',
-                            id: 'login'
-                        }
-                    ]
-                },
-                {
-                    alias: 'panel',
-                    text: 'panel1'
-//                    items: [
-//                        {
-//                            alias: 'list',
-//                            model: '',
-//                            store: '',
-//                            tpl: ''
-//                        }
-//                    ]
+                    alias: 'profile'
                 }
             ]
 
