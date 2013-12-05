@@ -7,7 +7,7 @@ jex.define('liststore', {
     extend: 'store',
 
     config: {
-        url: 'a.json',
+        url: 'data.json',
         method: 'get',
         dataType: 'json',
         params: {name: '123'}

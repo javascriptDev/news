@@ -10,9 +10,16 @@ req = urllib.request.Request('http://roll.news.qq.com/', None, headers)
 response = urllib.request.urlopen(req)
 page = response.read()
 
-pattern = re.compile(r'world')
+html = page.decode("gb2312");
 
-match = pattern.search(page)
-if match:
-    # 使用Match获得分组信息
-    print(match.group())
+print(re.search('<[aA].*?>.+?</[aA]>', html, 0).group())
+#
+#s = [];
+#data = []
+#
+#for i in range(0, 100):
+#    data.append(json.dumps({'name': i}));
+#
+#fobj = open("../data.json", 'w');
+#fobj.writelines('[' + ','.join(data) + ']');
+#fobj.close()
