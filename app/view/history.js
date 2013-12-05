@@ -13,7 +13,8 @@ jex.define('history', {
                     alias: 'button',
                     text: 'add',
                     align: 'left',
-                    id: 'add'
+                    id: 'add',
+                    style: 'maxWidth:50px'
                 }
             ]
         },

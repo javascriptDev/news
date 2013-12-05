@@ -14,13 +14,14 @@ jex.define('index', {
                     alias: 'button',
                     text: 'add',
                     align: 'left',
-                    id: 'add'
+                    id: 'add',
+                    style: 'maxWidth:50px'
                 }
             ]
         },
         {
             alias: 'panel',
-            text: 'panel1',
+            style: 'marginTop:40px',
             items: [
                 {
                     alias: 'list',
@@ -29,7 +30,8 @@ jex.define('index', {
 
                     tpl: '<div>{name}</div>',
                     itemTap: function (e, data, itemDom) {
-                        //itemDom.innerText = itemDom.innerText;
+                        //itemDom.innerText = itemDom.innerText
+                        console.log(data);
                     }
                 }
             ]

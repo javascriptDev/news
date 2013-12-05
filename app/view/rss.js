@@ -13,13 +13,15 @@ jex.define('info', {
                     alias: 'button',
                     text: 'select',
                     id: 'a',
-                    align: 'left'
+                    align: 'left',
+                    style: 'maxWidth:90px'
                 },
                 {
                     alias: 'button',
                     text: 'cancel',
                     id: 'b',
-                    align: 'right'
+                    align: 'right',
+                    style: 'maxWidth:90px'
                 }
             ]
         },

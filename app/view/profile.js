@@ -1,5 +1,5 @@
 /**
- * Created by ÂÆá‰πî on 13-12-5.
+ * Created by ”Ó«« on 13-12-5.
  */
 jex.define('profile', {
     alias: 'profile',
@@ -11,15 +11,40 @@ jex.define('profile', {
             items: [
                 {
                     alias: 'button',
-                    text: 'add',
+                    text: 'submit',
                     align: 'left',
-                    id: 'login'
+                    id: 'login',
+                    style: 'maxWidth:80px'
                 }
             ]
         },
         {
             alias: 'panel',
-            text: 'panel1'
+            items: [
+                {
+                    alias: 'form',
+                    style: 'marginTop:40px;',
+                    items: [
+                        {
+
+                            alias: 'text',
+                            placeHolder: 'username',
+                            label: '’Àªß'
+                        },
+                        {
+                            alias: 'password',
+                            label: '√‹¬Î'
+
+                        },
+                        {
+                            alias: 'button',
+                            text: 'Ã·Ωª',
+                            style: 'height:60px'
+
+                        }
+                    ]
+                }
+            ]
 
 
         }
