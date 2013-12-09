@@ -9,8 +9,7 @@ jex.define('liststore', {
     config: {
         url: 'data.json',
         method: 'get',
-        dataType: 'json',
-        params: {name: '123'}
+        dataType: 'json'
     },
     model: 'listmodel'
 })
