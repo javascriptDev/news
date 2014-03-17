@@ -27,7 +27,7 @@ jex.define('history', {
                     model: 'listmodel',
                     store: 'liststore',
 
-                    tpl: '<div>{name}</div>',
+                    tpl: '<div>{text}</div>',
                     itemTap: function (e, data, itemDom) {
                         //itemDom.innerText = itemDom.innerText;
                     }
