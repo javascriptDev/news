@@ -7,7 +7,7 @@ jex.define('liststore', {
     extend: 'store',
 
     config: {
-        url: 'data.json',
+        url: 'data/china.json',
         method: 'get',
         dataType: 'json'
     },

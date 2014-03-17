@@ -4,7 +4,7 @@ import http.server
 import socket
 
 
-PORT = 8001
+PORT = 8000
 ip = socket.gethostbyname(socket.gethostname())
 
 
@@ -23,7 +23,7 @@ try:
     print('Started http server')
     server.serve_forever()
 except KeyboardInterrupt:
-    print('^C received, shutting down s')
+    print('^C received, shutting down server')
     server.socket.close()
 
 

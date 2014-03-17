@@ -1,11 +1,13 @@
-
-
 __author__ = 'addisonJoe'
 
 import json
+import sys
+import urllib.parse
+import urllib.request
+import re
 
 
-def getData(data):
+def filterData(data):
     list = []
     for item in data:
         content = item['content']
@@ -14,13 +16,12 @@ def getData(data):
         if 'image' in item.keys():
             image = item['image']
 
-        list.append({'text': content['headline'],
+        list.append({'text': re.sub('<[^>]+>', '', str(content['headline'])),
                      'source': content['source']['name'],
-                     'abstract': content['abstract'],
+                     'abstract': re.sub('<[^>]+>', '', content['abstract']),
                      'destination': destination,
                      'images': image
         });
-
     return list
 
 
@@ -42,10 +43,10 @@ class BingNews():
             'sports': 'rt_Sports',
             'business': 'rt_Business'
         }
-        self.filePath = 'f:/JS/offlineNews/data/news.json'
+
 
     def getData(self, type):
-        data = json.loads(util.getData(self.url))
+        data = json.loads(self.Ajax(self.url))
         lastModifiedDate = data['lastModified']
         # database = DB.db()
         # database.add(lastModifiedDate, data);
@@ -59,11 +60,19 @@ class BingNews():
 
         return self.data[self.type[type]];
 
+    def Ajax(self, url):
+        user_agent = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3'
+        headers = {'User-Agent': user_agent}
+        req = urllib.request.Request(url, None, headers)
+        response = urllib.request.urlopen(req)
+        page = response.read()
+        return page.decode("utf-8")
+
 
 data = BingNews()
 
 #获取的数据存入相应的文件内
-baseUrl = 'f:/JS/offlineNews/data/'
+baseUrl = 'f:/JS/news/data/'
 
 topStory = baseUrl + 'news.json'
 sports = baseUrl + 'sports.json'
@@ -88,12 +97,8 @@ dataList = [
 
 for i in dataList:
     newsD = open(i['url'], 'r+')
-    json.dump(getData(data.getData(i['key'])), newsD)
+    json.dump(filterData(data.getData(i['key'])), newsD)
     newsD.close()
-
-
-
-
 
 
 
