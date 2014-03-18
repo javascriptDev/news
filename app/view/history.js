@@ -4,6 +4,7 @@
 jex.define('history', {
     alias: 'history',
     extend: 'viewport',
+    id: 'history',
     items: [
         {
             alias: 'titlebar',
@@ -20,14 +21,14 @@ jex.define('history', {
         },
         {
             alias: 'panel',
-            text: 'panel1',
+            style: 'marginTop:40px',
             items: [
                 {
                     alias: 'list',
                     model: 'listmodel',
-                    store: 'liststore',
+                    store: 'historyStore',
 
-                    tpl: '<div>{text}</div>',
+                    tpl: '<div class=name>{text}</div>',
                     itemTap: function (e, data, itemDom) {
                         //itemDom.innerText = itemDom.innerText;
                     }

@@ -7,16 +7,16 @@ jex.define('main', {
     type: 'ctl',
     alias: 'main',
     controls: [
-        {
-            selector: '#a',
-            type: 'tap',
-            handler: 'aTap'
-        },
-        {
-            selector: '#b',
-            type: 'tap',
-            handler: 'bTap'
-        },
+//        {
+//            selector: '#a',
+//            type: 'tap',
+//            handler: 'aTap'
+//        },
+//        {
+//            selector: '#b',
+//            type: 'tap',
+//            handler: 'bTap'
+//        },
         {
             selector: '#add',
             type: 'tap',

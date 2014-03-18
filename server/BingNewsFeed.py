@@ -97,6 +97,8 @@ dataList = [
 
 for i in dataList:
     newsD = open(i['url'], 'r+')
+    newsD.seek(0);
+    newsD.truncate();
     json.dump(filterData(data.getData(i['key'])), newsD)
     newsD.close()
 

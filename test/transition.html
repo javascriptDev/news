@@ -11,17 +11,22 @@
 
 <script>
     var el = document.querySelector('#a');
-    var distance = 100;
-    var seconds = 10;
-    s = el.style;
-    s.webkitTransition = '-webkit-transform ' + seconds + 'server cubic-bezier(0,1,0,1)';
-    s.webkitTransform = 'translate3d(' + distance + 'px,0,0)';
 
 
-
-    el.addEventListener("transitionEnd", function () {
+    el.addEventListener("webkitTransitionEnd", function () {
         alert(1);
     }, false);
+
+
+    el.onmouseover = function () {
+        var distance = 100;
+        var seconds = 10;
+        s = el.style;
+        s.webkitTransition = '-webkit-transform ' + seconds + 's cubic-bezier(0,1,0,1)';
+        s.webkitTransform = 'translate3d(' + distance + 'px,0,0)';
+
+    }
+
 
 </script>
 </body>

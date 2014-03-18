@@ -20,14 +20,14 @@ jex.define('main', {
 
 
         },
-        {
-            title: 'RSS',
-            items: [
-                {
-                    alias: 'rss'
-                }
-            ]
-        },
+//        {
+//            title: 'RSS',
+//            items: [
+//                {
+//                    alias: 'rss'
+//                }
+//            ]
+//        },
         {
             title: 'History',
             items: [
