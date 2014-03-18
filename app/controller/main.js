@@ -20,10 +20,15 @@ jex.define('main', {
         {
             selector: '#add',
             type: 'tap',
-            handler: 'add'
+            handler: 'aTap'
         },
         {
             selector: '#login',
+            type: 'tap',
+            handler: 'bTap'
+        },
+        {
+            selector: '#submit',
             type: 'tap',
             handler: 'add'
         }
