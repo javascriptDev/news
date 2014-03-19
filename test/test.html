@@ -1,41 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+    })
+
+
+</script>
     <title></title>
     <style>
         body {
             margin: 0;
             padding: 0;
+
+
         }
     </style>
 </head>
-<body>
+<body style="background: red">
 
+aahhh
 
-<script>
-
-    function Promise(fn) {
-        this.fn = fn;
-        fn();
-
-        //默认设置状态为ok。 以便调用成功函数
-        return this;
-    }
-
-    Promise.prototype.ok = function (fn) {
-        if (this.ok == true) {
-            fn();
-        }
-    }
-
-    new Promise(function () {
-        alert(1);
-    }).complete(function () {
-                alert(2);
-            })
-
-
-</script>
 
 </body>
 </html>
