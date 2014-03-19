@@ -11,6 +11,8 @@ def filterData(data):
     list = []
     for item in data:
         content = item['content']
+        image = []
+        destination = ''
         if 'destination' in item.keys():
             destination = item['destination']
         if 'image' in item.keys():
