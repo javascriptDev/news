@@ -1,4 +1,4 @@
-    /**
+/**
  * Created by 宇乔 on 13-11-21.
  */
 jex.define('main', {
@@ -11,7 +11,7 @@ jex.define('main', {
     },
     items: [
         {
-            title: 'News',
+            title: '精选',
             items: [
                 {
                     alias: 'index'
@@ -19,33 +19,42 @@ jex.define('main', {
             ]
 
 
-        },
+        }//,
+////        {
+////            title: 'RSS',
+////            items: [
+////                {
+////                    alias: 'rss'
+////                }
+////            ]
+////        },
 //        {
-//            title: 'RSS',
+//            title: '出版',
 //            items: [
 //                {
-//                    alias: 'rss'
+//                    alias: 'history'
 //                }
 //            ]
+//
 //        },
-        {
-            title: 'History',
-            items: [
-                {
-                    alias: 'history'
-                }
-            ]
-
-        },
-        {
-            title: 'Profile',
-            items: [
-                {
-                    alias: 'profile'
-                }
-            ]
-
-        }
+//        {
+//            title: '男生',
+//            items: [
+//                {
+//                    alias: 'profile'
+//                }
+//            ]
+//
+//        },
+//        {
+//            title: '女生',
+//            items: [
+//                {
+//                    alias: 'profile'
+//                }
+//            ]
+//
+//        }
     ],
     ready: function () {
     }

@@ -8,7 +8,7 @@ jex.define('index', {
     items: [
         {
             alias: 'titlebar',
-            text: 'News',
+            text: '.',
             items: [
                 {
                     alias: 'button',
