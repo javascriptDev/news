@@ -8,7 +8,7 @@ jex.define('index', {
     items: [
         {
             alias: 'titlebar',
-            text: '.',
+            text: 'main page',
             items: [
                 {
                     alias: 'button',
@@ -27,8 +27,8 @@ jex.define('index', {
                     alias: 'list',
                     model: 'listmodel',
                     store: 'liststore',
-
-                    tpl: '<div class=name>{text}</div>',
+                    id: 'index-list',
+                    tpl: '<div class=name><img src={img} />{text}</div>',
                     itemTap: function (e, data, itemDom) {
                         //itemDom.innerText = itemDom.innerText
                         console.log(data);

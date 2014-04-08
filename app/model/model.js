@@ -10,6 +10,9 @@ jex.define('listmodel', {
     fields: [
         {
             field: 'text'
+        },
+        {
+            field:'img'
         }
     ]
 
