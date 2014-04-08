@@ -36,5 +36,28 @@ jex.define('index', {
                 }
             ]
         }
-    ]
+    ],
+    rendered: function () {
+        var alert = jex.create('alert', {
+            title: '',
+            content: '',
+            buttons: [
+                {
+                    text: 'ok',
+                    tap: function () {
+
+                    }
+                },
+                {
+                    text: 'cancel',
+                    tap: function () {
+
+                    }
+                }
+            ]
+        });
+        debugger;
+        this.add(alert);
+
+    }
 })

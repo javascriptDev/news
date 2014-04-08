@@ -55,6 +55,7 @@ jex.define('main', {
 
         }
     ],
-    ready: function () {
+    rendered: function () {
+
     }
 });

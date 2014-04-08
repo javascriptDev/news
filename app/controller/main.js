@@ -3,9 +3,9 @@
  */
 jex.define('main', {
     extend: 'controller',
-    view: 'main',
+    view: 'index',
     type: 'ctl',
-    alias: 'main',
+    alias: 'index',
     controls: [
 //        {
 //            selector: '#a',
@@ -21,20 +21,21 @@ jex.define('main', {
             selector: '#add',
             type: 'tap',
             handler: 'aTap'
-        },
-        {
-            selector: '#login',
-            type: 'tap',
-            handler: 'bTap'
-        },
-        {
-            selector: '#submit',
-            type: 'tap',
-            handler: 'add'
-        }
+
+        }//,
+//        {
+//            selector: '#login',
+//            type: 'tap',
+//            handler: 'bTap'
+//        },
+//        {
+//            selector: '#submit',
+//            type: 'tap',
+//            handler: 'add'
+//        }
     ],
     aTap: function () {
-        alert(1);
+        debugger;
     },
     bTap: function () {
         alert(2);

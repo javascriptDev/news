@@ -8,7 +8,6 @@
     <script src="lib/core/jex.js"></script>
 
 
-
     <script src="lib/core/instanceManager.js"></script>
     <script src="lib/core/classManager.js"></script>
     <script src="lib/core/util.js"></script>
@@ -64,6 +63,7 @@
     <link href="lib/css/text.css" rel="stylesheet">
     <link href="lib/css/password.css" rel="stylesheet">
     <link href="lib/css/radio.css" rel="stylesheet">
+    <link href="lib/css/alert.css" rel="stylesheet">
     <script>
 
         //程序入口
@@ -73,15 +73,11 @@
             models: [],
             stores: [],
             start: function () {
-                var viewport = jex.create('viewport');
-
+                window.viewport = jex.create('viewport');
                 var panel = jex.create('main');
                 viewport.add(panel);
                 jex.start();
-
-
             },
-
             onUpdate: function (appcahce) {
                 var alert = jex.crate('alert', {
                     title: '',
