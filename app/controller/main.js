@@ -35,7 +35,7 @@ jex.define('main', {
 //        }
     ],
     aTap: function () {
-        debugger;
+        this.getCld('alert')[0].show();
     },
     bTap: function () {
         alert(2);

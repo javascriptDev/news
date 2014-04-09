@@ -45,7 +45,7 @@ jex.define('index', {
                 {
                     text: 'ok',
                     tap: function () {
-
+                        alert(1);
                     }
                 },
                 {
@@ -56,8 +56,6 @@ jex.define('index', {
                 }
             ]
         });
-        debugger;
         this.add(alert);
-
     }
 })

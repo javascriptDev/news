@@ -17,43 +17,42 @@ jex.define('main', {
                     alias: 'index'
                 }
             ]
-
-        },
-        {
-            title: 'RSS',
-            items: [
-                {
-                    alias: 'rss'
-                }
-            ]
-        },
-        {
-            title: '出版',
-            items: [
-                {
-                    alias: 'history'
-                }
-            ]
-
-        },
-        {
-            title: '男生',
-            items: [
-                {
-                    alias: 'profile'
-                }
-            ]
-
-        },
-        {
-            title: '女生',
-            items: [
-                {
-                    alias: 'profile'
-                }
-            ]
-
-        }
+        }//,
+//        {
+//            title: 'RSS',
+//            items: [
+//                {
+//                    alias: 'rss'
+//                }
+//            ]
+//        },
+//        {
+//            title: '出版',
+//            items: [
+//                {
+//                    alias: 'history'
+//                }
+//            ]
+//
+//        },
+//        {
+//            title: '男生',
+//            items: [
+//                {
+//                    alias: 'profile'
+//                }
+//            ]
+//
+//        },
+//        {
+//            title: '女生',
+//            items: [
+//                {
+//                    alias: 'profile'
+//                }
+//            ]
+//
+//        }
     ],
     rendered: function () {
 
