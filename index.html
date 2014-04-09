@@ -5,107 +5,10 @@
     <title></title>
 
     <!--框架js-->
-    <script src="lib/core/jex.js"></script>
-
-
-    <script src="lib/core/instanceManager.js"></script>
-    <script src="lib/core/classManager.js"></script>
-    <script src="lib/core/util.js"></script>
-    <script src="lib/core/core.js"></script>
-    <script src="lib/event.js"></script>
-    <script src="lib/DOM.js"></script>
-    <script src="lib/animation.js"></script>
-    <script src="lib/Promise.js"></script>
-    <script src="lib/viewport.js"></script>
-    <script src="lib/panel.js"></script>
-    <script src="lib/titlebar.js"></script>
-    <script src="lib/form/form.js"></script>
-    <script src="lib/tab.js"></script>
-
-    <script src="lib/button.js"></script>
-    <script src="lib/controller/controller.js"></script>
-    <script src="lib/model/model.js"></script>
-    <script src="lib/store/store.js"></script>
-    <script src="lib/Queue.js"></script>
-    <script src="lib/store/Ajax.js"></script>
-    <script src="lib/store/storeMgr.js"></script>
-    <script src="lib/list.js"></script>
-    <script src="lib/form/text.js"></script>
-    <script src="lib/form/password.js"></script>
-    <script src="lib/form/radio.js"></script>
-    <script src="lib/core/cache.js"></script>
-    <script src="lib/alert.js"></script>
-
-
-    <!--model js-->
-    <script src="app/model/model.js"></script>
-
-    <!--controller-->
-    <script src="app/controller/main.js"></script>
-
-    <!--store-->
-    <script src="app/store/liststore.js"></script>
-    <script src="app/store/historyStore.js"></script>
-
-    <!--view-->
-    <script src="app/view/index.js"></script>
-    <script src="app/view/rss.js"></script>
-    <script src="app/view/history.js"></script>
-    <script src="app/view/profile.js"></script>
-    <script src="app/view/main.js"></script>
+    <script src="production/production.min.js"></script>
 
     <!--框架 css-->
-    <link href="lib/css/base.css" rel="stylesheet">
-    <link href="lib/css/tab.css" rel="stylesheet">
-    <link href="lib/css/title.css" rel="stylesheet">
-    <link href="lib/css/button.css" rel="stylesheet">
-    <link href="lib/css/list.css" rel="stylesheet">
-    <link href="lib/css/text.css" rel="stylesheet">
-    <link href="lib/css/password.css" rel="stylesheet">
-    <link href="lib/css/radio.css" rel="stylesheet">
-    <link href="lib/css/alert.css" rel="stylesheet">
-    <script>
-
-        //程序入口
-        jex.application({
-            views: [],
-            controllers: [],
-            models: [],
-            stores: [],
-            start: function () {
-                window.viewport = jex.create('viewport');
-                var panel = jex.create('main');
-                viewport.add(panel);
-                jex.start();
-            },
-            onUpdate: function (appcahce) {
-                var alert = jex.crate('alert', {
-                    title: '',
-                    content: '',
-                    buttons: [
-                        {
-                            text: 'ok',
-                            tap: function () {
-
-                            }
-                        },
-                        {
-                            text: 'cancel',
-                            tap: function () {
-                                debugger;
-                            }
-                        }
-                    ]
-                });
-                alert.show();
-
-            }
-
-
-
-
-        });
-    </script>
+    <link href="production/min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .age {
             float: right;
