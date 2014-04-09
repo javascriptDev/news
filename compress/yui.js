@@ -19,12 +19,20 @@ var appView = app + 'view/';
 var appStore = app + 'store/';
 
 var arr = [
+    //core
         core + '/jex.js', core + 'core.js', core + 'instanceManager.js', core + 'classManager.js', core + 'util.js', core + 'cache.js',
-        root + 'event.js', root + 'DOM.js', root + 'animation.js', root + 'Promise.js', root + 'viewport.js', root + 'panel.js', root + 'titlebar.js', root + 'tab.js', root + 'button.js', root + 'list.js', root + 'alert.js',
+    //help
+        root + 'event.js', root + 'DOM.js', root + 'animation.js', root + 'Promise.js', root + 'Queue.js',
+    //view
+        root + 'viewport.js', root + 'panel.js', root + 'titlebar.js', root + 'tab.js', root + 'button.js', root + 'list.js', root + 'alert.js',
         form + 'form.js', form + 'text.js', form + 'password.js', form + 'radio.js',
+    //model
         model + 'model.js',
+    //controller
         ctl + 'controller.js',
+    //store
         store + 'store.js', store + 'Ajax.js', store + 'storeMgr.js',
+    //app file
         appModel + 'model.js',
         appCtl + 'main.js',
         appStore + 'listStore.js', appStore + 'historyStore.js',

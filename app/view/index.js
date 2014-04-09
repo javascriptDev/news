@@ -28,7 +28,7 @@ jex.define('index', {
                     model: 'listmodel',
                     store: 'liststore',
                     id: 'index-list',
-                    tpl: '<div class=name><img src={img} />{text}</div>',
+                    tpl: '<img  src={img}  class=book /><div style=-webkit-box-flex:1;margin-left:20px;><div class=title>{title}</div><div class=author>{author}</div><div class=profile>{profile}</div></div>',
                     itemTap: function (e, data, itemDom) {
                         //itemDom.innerText = itemDom.innerText
                         console.log(data);

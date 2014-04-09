@@ -18,23 +18,8 @@ jex.define('history', {
                     style: 'maxWidth:50px'
                 }
             ]
-        },
-        {
-            alias: 'panel',
-            style: 'marginTop:40px',
-            items: [
-                {
-                    alias: 'list',
-                    model: 'listmodel',
-                    store: 'historyStore',
-
-                    tpl: '<div class=name>{text}</div>',
-                    itemTap: function (e, data, itemDom) {
-                        //itemDom.innerText = itemDom.innerText;
-                    }
-                }
-            ]
         }
+
     ]
 
 })

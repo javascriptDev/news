@@ -13,20 +13,16 @@
 
 }
 
-.jex-component-list div {
-    box-shadow: 2px 2px 2px #bbb;
-    height: 50px;
-    line-height: 50px;
-    font-weight: 700;
-}
-
 ::selection {
     background-color: red;
+}
+
+.jex-component-list-item-inner {
+    display: -webkit-box;
 }
 
 .jex-component-list div.itemSelected {
     color: white;
     border: 1px solid red;
-    background: red;
-    /*background-image: -webkit-gradient(linear, 80% 20%, 10% 21%, from(#A42800), to(#BB0028));*/
+    background-image: -webkit-gradient(linear, 80% 20%, 10% 21%, from(#A42800), to(#BB0028));
 }

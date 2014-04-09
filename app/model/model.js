@@ -9,10 +9,16 @@ jex.define('listmodel', {
 
     fields: [
         {
-            field: 'text'
+            field: 'img'
         },
         {
-            field:'img'
+            field: 'title'
+        },
+        {
+            field: 'author'
+        },
+        {
+            field: 'profile'
         }
     ]
 
