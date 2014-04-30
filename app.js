@@ -7,13 +7,14 @@ jex.application({
     models: [],
     stores: [],
     start: function () {
+
         window.viewport = jex.create('viewport');
         var panel = jex.create('main');
         viewport.add(panel);
         jex.start();
     },
     onUpdate: function (appcahce) {
-        var alert = jex.crate('alert', {
+        var alert = jex.create('alert', {
             title: '',
             content: '',
             buttons: [
@@ -31,7 +32,9 @@ jex.application({
                 }
             ]
         });
+      //  document.body.appendChild(alert.element);
         alert.show();
+
 
     }
 
