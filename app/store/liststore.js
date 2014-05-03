@@ -12,4 +12,4 @@ jex.define('liststore', {
         dataType: 'json'
     },
     model: 'listmodel'
-})
+});

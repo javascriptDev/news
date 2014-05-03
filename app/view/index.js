@@ -38,24 +38,24 @@ jex.define('index', {
         }
     ],
     rendered: function () {
-        var alert = jex.create('alert', {
-            title: '',
-            content: '',
-            buttons: [
-                {
-                    text: 'ok',
-                    tap: function () {
-                        alert(1);
-                    }
-                },
-                {
-                    text: 'cancel',
-                    tap: function () {
-
-                    }
-                }
-            ]
-        });
-        this.add(alert);
+//        var alert = jex.create('alert', {
+//            title: '',
+//            content: '',
+//            buttons: [
+//                {
+//                    text: 'ok',
+//                    tap: function () {
+//                        alert(1);
+//                    }
+//                },
+//                {
+//                    text: 'cancel',
+//                    tap: function () {
+//
+//                    }
+//                }
+//            ]
+//        });
+//        this.add(alert);
     }
 })
