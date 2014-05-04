@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    height: 100px;
+    width: 100%;
+    border: 1px solid red;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 100px;
+}
+
+.content {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid green;
+    min-height: 400px;
+}
+
+.type-list {
+    float: left;
+    width: 16%;
+    height: auto;
+    border: 1px solid black;
+}
+
+.main {
+    float: right;
+    width: 83%;
+    height: auto;
+    border: 1px solid yellow;
+}
+
+
