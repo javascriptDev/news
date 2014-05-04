@@ -22,7 +22,14 @@ var Component = {
     control: {
         viewport: function () {
 
-            var data = {};
+            var data = {
+                name: 'viewport',
+                layer: '<div>控件的基类</div>',
+                demo: '<div>var a=jex.create("viewport");</div>',
+                property: '属性',
+                method: '方法',
+                event: '事件'
+            };
             return Component.replace(data);
         },
         panel: function () {
