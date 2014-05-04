@@ -2,28 +2,10 @@
  * Created by ad on 14-5-3.
  */
 (function () {
-    var tree = function (data) {
-        this.data = data || [];
-    }
-
-    tree.prototype.data = function (data) {
-        var typeNode = [];
-        var leaf = [];
-        if (Object.prototype.toString.call(data) == '[object Array]') {
-            data.forEach(function (item, index) {
-                //添加到根节点
-                typeNode.push(item['type']);
-
-
-            })
-
-        }
-
-    }
 
     var a = [
         {
-            type: 'control',
+            node: 'control',
             items: [
                 {
                     name: 'viewport'
@@ -37,20 +19,101 @@
             ]
         },
         {
-            type: 'event',
+            node: 'event',
             items: [
+                {
+                    name: 'eventBase'
+                }
             ]
         },
         {
-            type: 'store',
+            node: 'store',
             items: [
                 {name: 'storeMgr'},
                 {name: 'store'}
             ]
         }
-
     ]
 
+    //点击类别的时候
+    var nodeFuc = function (dom) {
+        var el = dom.querySelector('i'),
+            cls = el.className;
+        if (cls.indexOf('collapse') != -1) {
+            el.className = cls.replace('collapse', 'expand');
+            dom.parentNode.querySelector('.leaf-container').style.display = 'block';
 
+        } else {
+            el.className = cls.replace('expand', 'collapse');
+            dom.parentNode.querySelector('.leaf-container').style.display = 'none';
+        }
+
+    };
+
+    //点击具体组建的时候
+    var leafFunc = function (dom) {
+
+    }
+
+    var addEvent = function (dom) {
+        dom.onclick = function (e) {
+            var cls = e.target.className;
+            if (cls) {
+                if (cls == 'node-dom') {
+                    nodeFuc(e.target);
+                } else if (cls == 'leaf-dom') {
+                    leafFunc(e.target);
+                }else if(cls=='icon'){
+
+                }
+            }
+        }
+    }
+
+    var nodeDom = function (text) {
+        var a = document.createElement('div');
+        a.className = 'node-dom';
+        a.innerHTML = '<i class="icon expand"></i>' + text;
+        return a;
+    };
+    var leafDom = function (text) {
+        var a = document.createElement('div');
+        a.className = 'leaf-dom';
+        a.innerText = text;
+        return a;
+    };
+    var c = document.createElement('div');
+    c.className = 'j-tree';
+    var tree = function (data) {
+        this.data = a;
+        this.el = c;
+    }
+
+    tree.prototype.render = function (data) {
+        var me = this, el = [];
+
+        Array.prototype.forEach.call(data || this.data, function (item, index) {
+            var area = document.createElement('div');
+            area.className = 'area-type';
+            area.appendChild(nodeDom(item.node));
+
+            var leafColl = document.createElement('div');
+            leafColl.className = 'leaf-container';
+
+            Array.prototype.forEach.call(item.items, function (leaf) {
+                leafColl.appendChild(leafDom(leaf.name));
+            });
+            area.appendChild(leafColl);
+            me.el.appendChild(area);
+        });
+
+
+        addEvent(this.el);
+
+
+        return this.el;
+    }
     window['Tree'] = tree;
-}())
+}()
+    )
+
