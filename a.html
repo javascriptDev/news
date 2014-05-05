@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        
+        function tab_label(tabid) {
+            var taglength = $("a[id='tab_label_tag']").length;
+            for (i = 0; i < taglength; i++) {
+                if (tabid == i) {
+                    $("a[id='tab_label_tag']").eq(i).addClass('current');
+                    $('#tab_label_' + i).show();
+                } else {
+                    $("a[id='tab_label_tag']").eq(i).removeClass('current');
+                    $('#tab_label_' + i).hide();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>
