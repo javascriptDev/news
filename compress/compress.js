@@ -12,7 +12,7 @@ var ctl = root + 'controller/';
 var form = root + 'form/';
 var model = root + 'model/';
 var store = root + 'store/';
-var app = 'app/';
+var app = 'demo/app/';
 var appModel = app + 'model/';
 var appCtl = app + 'controller/';
 var appView = app + 'view/';
@@ -37,7 +37,7 @@ var arr = [
         appCtl + 'main.js',
         appStore + 'listStore.js', appStore + 'historyStore.js',
         appView + 'main.js', appView + 'index.js', appView + 'profile.js', appView + 'history.js', appView + 'rss.js',
-    'app.js'
+    'demo/app.js'
 ]
 var compileCss = [
         css + 'base.css', css + 'alert.css', css + 'button.css', css + 'list.css', css + 'radio.css', css + 'password.css', css + 'text.css', css + 'title.css', css + 'tab.css'

@@ -1,5 +1,7 @@
 /**
  * Created by John on 2014/5/5.
+ * EN:
+ * CN:所有的组件的信息介绍
  */
 var data = {
     control: {
