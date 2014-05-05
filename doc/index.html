@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <script src="DOM.js"></script>
     <script src='tree.js'></script>
+    <script src="ComponentData.js"></script>
 </head>
 <body>
 
@@ -54,7 +55,7 @@
         var info = getInfo(location.href);
         var html = '';
         if (info.type && info.name) {
-            html = Component[info.type][info.name]();
+            html = data[info.type][info.name]();
         } else {
             html = '<div>欢迎</div>';
         }
