@@ -26,8 +26,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d10100', endColorstr='#b70100', GradientType=0 ); /* IE6-9 */
     box-shadow:-1px -1px 0 #ae0201, 1px -1px 0 #ae0201, -1px 1px 0 #ae0201, 1px 1px 0 #ae0201;
     text-shadow:none;
-    padding:10px 16px 13px 16px;
-
+    padding:8px 16px 13px 16px;
 }
 
 .leaf-container {
@@ -50,9 +49,23 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#e3e3e3', GradientType=0 ); /* IE6-9 */
     box-shadow:-1px -1px 0 #b3b3b3, 1px -1px 0 #b3b3b3, -1px 1px 0 #b3b3b3, 1px 1px 0 #b3b3b3;
     border-radius:3px;
-    padding:10px 16px 13px 16px;
+    padding:8px 16px 13px 16px;
     text-shadow:-1px -1px 0 #f2f0f0, 1px -1px 0 #f2f0f0, -1px 1px 0 #f2f0f0, 1px 1px 0 #f2f0f0;
 }
+
+.middle-dom{
+    display:block;
+    color:#3a3a3a;
+    text-decoration:none;
+    border:1px solid #fff;
+    background: #e0e0e0; /* Old browsers */
+
+    box-shadow:-1px -1px 0 #b3b3b3, 1px -1px 0 #b3b3b3, -1px 1px 0 #b3b3b3, 1px 1px 0 #b3b3b3;
+    border-radius:3px;
+    padding:8px 16px 13px 16px;
+    text-shadow:-1px -1px 0 #f2f0f0, 1px -1px 0 #f2f0f0, -1px 1px 0 #f2f0f0, 1px 1px 0 #f2f0f0;
+}
+
 .leaf-dom:hover{
     border:1px solid #676b6f;
     background: #2d3237; /* Old browsers */
@@ -79,7 +92,7 @@
     top: 5px;
     border-style: dashed dashed dashed solid;
     cursor: pointer;
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 .collapse {

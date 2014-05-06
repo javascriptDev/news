@@ -9,6 +9,7 @@
             items: [
                 {
                     name: 'viewport'
+
                 },
                 {
                     name: 'panel'
@@ -70,8 +71,8 @@
                     nodeFuc(e.target);
                 } else if (cls == 'leaf-dom') {
                     leafFunc.call(me, e.target);
-                } else if (cls == 'icon') {
-
+                } else if (cls == 'middle-dom') {
+                    nodeFuc(e.target);
                 }
             }
         }
@@ -90,6 +91,14 @@
         a.setAttribute('data-name', name);
         return a;
     };
+    var middleDom = function (name, type) {
+        var a = document.createElement('div');
+        a.className = 'middle-dom';
+        a.innerHTML = '<i class="icon expand"></i>' + name;
+        a.setAttribute('data-type', type);
+        a.setAttribute('data-name', name);
+        return a;
+    };
     var c = document.createElement('div');
     c.className = 'j-tree';
     var tree = function (cfg) {
@@ -97,19 +106,39 @@
         this.el = c;
         this.leafClick = cfg.leafClick || null;
     }
+
+    function digui(parent, items, type) {
+        Array.prototype.forEach.call(items, function (leaf) {
+            if (!leaf.items) {
+                parent.appendChild(leafDom(leaf.name, type));
+            } else {
+                var c = document.createElement('div');
+                c.className = 'leaf-container';
+                var node = middleDom(leaf.name, type);
+                parent.appendChild(node);
+                parent.appendChild(c);
+
+                digui(c, leaf.items, leaf.name);
+            }
+        });
+    }
+
     tree.prototype.render = function (data) {
         var me = this, el = [];
         Array.prototype.forEach.call(data || this.data, function (item, index) {
+
+            //添加大类别 like control,event..
             var area = document.createElement('div');
             area.className = 'area-type';
             area.appendChild(nodeDom(item.node));
 
+            //创建该类别下所有节点的容器
             var leafColl = document.createElement('div');
             leafColl.className = 'leaf-container';
 
-            Array.prototype.forEach.call(item.items, function (leaf) {
-                leafColl.appendChild(leafDom(leaf.name,item.node));
-            });
+            //遍历所有节点,并添加到 leafColl 上
+            digui(leafColl, item.items, item.node);
+
             area.appendChild(leafColl);
             me.el.appendChild(area);
         });

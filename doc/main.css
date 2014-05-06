@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .title {
@@ -31,7 +32,62 @@
     width: 83%;
     height: 600px;
     overflow-x: auto;
+    box-shadow: -1px -1px 0 #b3b3b3, 1px -1px 0 #b3b3b3, -1px 1px 0 #b3b3b3, 1px 1px 0 #b3b3b3;
+    border-radius: 3px;
+    border: 1px solid #fff;
 
+}
+
+input[type=text] {
+
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(http://livedemo00.template-help.com/wordpress_42920/wp-content/themes/theme1988/images/subscribe_input.png);
+    background-origin: padding-box;
+    background-size: auto;
+    border-radius: 10px;
+    border-width: 0;
+    border-image-slice: 100%;
+    border-color: rgb(255, 255, 255);
+    border-style: none;
+    color: rgb(255, 255, 255);
+
+    font-size: 14px;
+    height: 19px;
+    min-height: 19px;
+    outline-color: rgb(255, 255, 255);
+    outline-style: none;
+    outline-width: 0px;
+    padding: 10px 21px 10px 21px;
+    width: 250px;
+
+    zoom: 1;
+}
+
+#getClass {
+    background: url(img/subscribe_submit.png) no-repeat 0% 0%;
+
+    width: 140px;
+    height: 39px;
+    margin: 0 0 0 21px;
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+#getClass:hover {
+    background-position: 0% -55px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .split {
@@ -107,6 +163,13 @@ label {
     /* W3C Markup */
     /*background-image: linear-gradient(to bottom, rgb(30, 87, 153) 0%, rgb(41, 137, 216) 30%, rgb(41, 137, 216) 70%, rgb(30, 87, 153) 100%);*/
     /*color: white;*/
+
+}
+
+.m-info .name{
+    background: url(img/header.jpg);
+    color:white;
+    font-weight: 700;
 
 }
 

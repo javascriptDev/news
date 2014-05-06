@@ -23,10 +23,12 @@
         return document.querySelectorAll(argument)[0];
     }
 
+
     var url = location.href;
     var left = $('.type-list');
     var right = $('.main');
 
+    right.style.height = window.innerHeight - 150 + 'px';
     //生成树
     var tree = new Tree({
         leafClick: function (o) {
