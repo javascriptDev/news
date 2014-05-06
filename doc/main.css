@@ -35,10 +35,26 @@
 }
 
 .split {
-    height: 20px;
-    line-height: 20px;
-    background: dodgerblue;
-    color: white;
+    border: 1px solid #fff;
+    background: #f1f1f1; /* Old browsers */
+    background: -moz-linear-gradient(top, #f1f1f1 0%, #e3e3e3 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1f1f1), color-stop(100%, #e3e3e3)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f1f1f1 0%, #e3e3e3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f1f1f1 0%, #e3e3e3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f1f1f1 0%, #e3e3e3 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #f1f1f1 0%, #e3e3e3 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#e3e3e3', GradientType=0); /* IE6-9 */
+    box-shadow: -1px -1px 0 #b3b3b3, 1px -1px 0 #b3b3b3, -1px 1px 0 #b3b3b3, 1px 1px 0 #b3b3b3;
+    border-radius: 3px;
+    padding: 4px 16px 9px 16px;
+    text-shadow: -1px -1px 0 #f2f0f0, 1px -1px 0 #f2f0f0, -1px 1px 0 #f2f0f0, 1px 1px 0 #f2f0f0;
+    margin: 0 0 10px 0;
+
+    font-size: 23px;
+    line-height: normal;
+    color: #fd0b0a;
+    font-weight: bold;
+    margin: 0;
 }
 
 .list-item {
@@ -64,7 +80,12 @@
     text-align: center;
     height: 40px;
     line-height: 40px;
-    color:red;
+    color: red;
+}
+
+.m-tool {
+    text-align: right;
+    padding: 10px 40px 10px;
 }
 
 label {
