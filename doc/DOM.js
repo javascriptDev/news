@@ -6,10 +6,10 @@ var Component = {
         '<button id="getClass">搜索</button>' +
         '</div>' +
         '<div class="m-info">' +
-        '<div class="name">{name}</div>' +
-        '<div class="layer">{layer}</div>' +
+        '<div class="name">组件名:{name}</div>' +
+        '<div class="layer">继承关系:{layer}</div>' +
         '</div>' +
-        '<div class="demo">{demo}</div>' +
+        '<div class="demo">用法:{demo}</div>' +
         '<div class="property"><div class="split">属性</div>{property}</div>' +
         '<div class="method"><div class="split">方法</div>{method}</div>' +
         '<div class="event"><div class="split">事件</div>{event}</div>',
