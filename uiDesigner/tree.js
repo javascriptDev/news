@@ -141,13 +141,10 @@
 
     };
 
-    //点击具体组建的时候
-    var leafFunc = function (dom) {
-        if (this.leafClick) {
-            this.leafClick({
-                type: dom.dataset['type'],
-                name: dom.dataset['name']
-            });
+    //拖拽具体组建的时候
+    var leafFunc = function (e) {
+        if (this.dragStart) {
+            this.dragStart(e);
         }
 
     }
@@ -159,10 +156,15 @@
             if (cls) {
                 if (cls == 'node-dom') {
                     nodeFuc(e.target);
-                } else if (cls == 'leaf-dom') {
-                    leafFunc.call(me, e.target);
-                } else if (cls == 'middle-dom') {
-                    nodeFuc(e.target);
+                }
+            }
+        }
+
+        this.el.ondragstart = function (e) {
+            var cls = e.target.className;
+            if (cls) {
+                if (cls == 'leaf-dom') {
+                    leafFunc.call(me, e);
                 }
             }
         }
@@ -177,9 +179,10 @@
         var a = document.createElement('div');
         a.className = 'leaf-dom';
         a.innerText = name;
-
+        a.id = name + '-' + Math.floor(Math.random() * 100000);
         a.setAttribute('data-type', type);
         a.setAttribute('data-name', name);
+        a.setAttribute('draggable', true);
         return a;
     };
     var middleDom = function (name, type) {
@@ -196,6 +199,10 @@
         this.data = data;
         this.el = c;
         this.leafClick = cfg.leafClick || null;
+
+        for (var i in cfg) {
+            this[i] = cfg[i];
+        }
     }
 
     function digui(parent, items, type) {

@@ -3,7 +3,8 @@
 <head>
     <title>tree test</title>
     <link rel="stylesheet" type="text/css" href="tree.css">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../uiDesigner/main.css">
+
     <script src="DOM.js"></script>
     <script src='tree.js'></script>
     <script src="ComponentData.js"></script>
@@ -24,11 +25,14 @@
     }
 
 
+    //获取url
     var url = location.href;
     var left = $('.type-list');
     var right = $('.main');
 
+    //根据浏览器大小设置 主内容高度
     right.style.height = window.innerHeight - 150 + 'px';
+
     //生成树
     var tree = new Tree({
         leafClick: function (o) {
@@ -38,7 +42,7 @@
     var dom = tree.render();
     left.appendChild(dom);
 
-    //获取url中有用的信息
+    //解析 hash
     function getInfo(url) {
         var params = url.split('#!'), type, name;
         if (params.length > 1) {
@@ -59,7 +63,7 @@
         if (info.type && info.name) {
             html = data[info.type][info.name]();
         } else {
-            html = '<div>欢迎</div>';
+            html = '<div>欢迎来到文档</div>';
         }
         right.innerHTML = html;
     }

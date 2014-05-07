@@ -66,7 +66,7 @@ input[type=text] {
 }
 
 #getClass {
-    background: url(img/subscribe_submit.png) no-repeat 0% 0%;
+    background: url(../doc/img/subscribe_submit.png) no-repeat 0% 0%;
 
     width: 140px;
     height: 39px;
@@ -167,7 +167,7 @@ label {
 }
 
 .m-info .name{
-    background: url(img/header.jpg);
+    background: url(../doc/img/header.jpg);
     color:white;
     font-weight: 700;
 
