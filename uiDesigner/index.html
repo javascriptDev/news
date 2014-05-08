@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>tree test</title>
+
+    <title>APP UI Designer</title>
     <link rel="stylesheet" type="text/css" href="tree.css">
+    <link rel="stylesheet" type="text/css" href="../production/min.css">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <!--<script src="../production/production.min.js"></script>-->
+
     <script src='tree.js'></script>
+    <!--框架js-->
+    <script src="../lib/core/jex.js"></script>
+
+
+    <script src="../lib/core/instanceManager.js"></script>
+    <script src="../lib/core/classManager.js"></script>
+    <script src="../lib/core/util.js"></script>
+    <script src="../lib/core/core.js"></script>
+    <script src="../lib/event.js"></script>
+    <script src="../lib/DOM.js"></script>
+    <script src="../lib/animation.js"></script>
+    <script src="../lib/Promise.js"></script>
+    <script src="../lib/viewport.js"></script>
+    <script src="../lib/panel.js"></script>
+    <script src="../lib/titlebar.js"></script>
+    <script src="../lib/form/form.js"></script>
+    <script src="../lib/tab.js"></script>
+
+    <script src="../lib/button.js"></script>
+    <script src="../lib/controller/controller.js"></script>
+    <script src="../lib/model/model.js"></script>
+    <script src="../lib/store/store.js"></script>
+    <script src="../lib/Queue.js"></script>
+    <script src="../lib/store/Ajax.js"></script>
+    <script src="../lib/store/storeMgr.js"></script>
+    <script src="../lib/list.js"></script>
+    <script src="../lib/form/text.js"></script>
+    <script src="../lib/form/password.js"></script>
+    <script src="../lib/form/radio.js"></script>
+    <script src="../lib/core/cache.js"></script>
+    <script src="../lib/alert.js"></script>
+
+
+
+    <!--框架 css-->
+    <link href="../lib/css/base.css" rel="stylesheet">
+    <link href="../lib/css/tab.css" rel="stylesheet">
+    <link href="../lib/css/title.css" rel="stylesheet">
+    <link href="../lib/css/button.css" rel="stylesheet">
+    <link href="../lib/css/list.css" rel="stylesheet">
+    <link href="../lib/css/text.css" rel="stylesheet">
+    <link href="../lib/css/password.css" rel="stylesheet">
+    <link href="../lib/css/radio.css" rel="stylesheet">
+    <link href="../lib/css/alert.css" rel="stylesheet">
 </head>
 <body>
 
@@ -15,6 +63,7 @@
     <div class="main">
 
     </div>
+    <div class="property"></div>
 </div>
 <script type="text/javascript">
     var $ = function query(argument) {
@@ -31,7 +80,8 @@
 
     var tree = new Tree({
         dragStart: function (e) {
-            e.dataTransfer.setData("Text", e.target.id);
+            e.dataTransfer.setData("Text", e.target.dataset['name']);
+            e.dataTransfer.setData("id", e.target.id);
         }
     });
     var dom = tree.render();
@@ -39,12 +89,13 @@
     document.querySelector('.main').ondrop = function (e) {
         e.preventDefault();
         var data = e.dataTransfer.getData("Text");
-        e.target.appendChild(document.querySelector('#' + data));
 
+        var com = jex.create(data,{text:'asdd',label:'name'});
+        com.beforeRender();
+        e.target.appendChild(com.element);
     }
     document.querySelector('.main').ondragover = function (e) {
         e.preventDefault();
-
     }
 </script>
 </body>

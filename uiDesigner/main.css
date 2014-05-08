@@ -28,14 +28,21 @@
 }
 
 .main {
-    float: right;
-    width: 83%;
+    float: left;
+    width: 68%;
     height: 600px;
     overflow-x: auto;
     box-shadow: -1px -1px 0 #b3b3b3, 1px -1px 0 #b3b3b3, -1px 1px 0 #b3b3b3, 1px 1px 0 #b3b3b3;
     border-radius: 3px;
     border: 1px solid #fff;
+    margin-left: 5px;
+}
 
+.property {
+    width: 15%;
+    float: right;
+    border: 1px solid red;
+    height: 600px;
 }
 
 input[type=text] {
@@ -166,9 +173,9 @@ label {
 
 }
 
-.m-info .name{
+.m-info .name {
     background: url(../doc/img/header.jpg);
-    color:white;
+    color: white;
     font-weight: 700;
 
 }
