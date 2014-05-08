@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        function DelCookie(name) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval = GetCookie(name);
+            documents.cookie = name + "=" + cval + ";  expires=" + exp.toGMTString();
+        }
+
+        function getCookie(name) {//取cookies函数
+            var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+            if (arr != null) return unescape(arr[2]);
+            return null;
+
+        }
+        function SetCookie(name, value) {
+            var expdate = new Date();
+            var argv = SetCookie.arguments;
+            var argc = SetCookie.arguments.length;
+            var expires = (argc > 2) ? argv[2] : null;
+            var path = (argc > 3) ? argv[3] : null;
+            var domain = (argc > 4) ? argv[4] : null;
+            var secure = (argc > 5) ? argv[5] : false;
+            if (expires != null)  expdate.setTime(expdate.getTime() + (  expires * 1000  ));
+            documents.cookie = name + "=" + escape(value) + ((expires == null) ? "" : (";  expires=" + expdate.toGMTString()))
+                    + ((path == null) ? "" : (";  path=" + path)) + ((domain == null) ? "" : (";  domain=" + domain))
+                    + ((secure == true) ? ";  secure" : "");
+        }
+
+        var cookie = getCookie('mostcms');
+        var o = [
+            {name: 'total_pages', val: 10},
+            {name: 'page_size', val: 20}
+        ];
+
+
+
+        document.cookie = cookie;
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

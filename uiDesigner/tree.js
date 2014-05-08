@@ -244,6 +244,5 @@
         return this.el;
     }
     window['Tree'] = tree;
-}()
-    )
+}())
 
