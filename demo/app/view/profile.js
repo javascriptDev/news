@@ -29,16 +29,16 @@ jex.define('profile', {
 
                             alias: 'text',
                             placeHolder: 'username',
-                            label: '�˻�'
+                            label: '用户名'
                         },
                         {
                             alias: 'password',
-                            label: '����'
+                            label: '密码'
 
                         },
                         {
                             alias: 'button',
-                            text: '�ύ',
+                            text: '提交',
                             style: 'height:60px',
                             id:'submit'
 

@@ -50,7 +50,7 @@
             node: 'model',
             items: [
                 {
-                    name: 'modelBase'
+                    name: 'model'
                 }
             ]
 
@@ -58,7 +58,7 @@
         {
             node: 'controller',
             items: [
-                {name: 'controllerBase'}
+                {name: 'controller'}
             ]
         },
         {
@@ -195,16 +195,6 @@
     };
     var c = document.createElement('div');
     c.className = 'j-tree';
-    var tree = function (cfg) {
-        this.data = data;
-        this.el = c;
-        this.leafClick = cfg.leafClick || null;
-
-        for (var i in cfg) {
-            this[i] = cfg[i];
-        }
-    }
-
     function digui(parent, items, type) {
         Array.prototype.forEach.call(items, function (leaf) {
             if (!leaf.items) {
@@ -219,6 +209,15 @@
                 digui(c, leaf.items, leaf.name);
             }
         });
+    }
+
+    var tree = function (cfg) {
+        this.data = data;
+        this.el = c;
+        this.leafClick = cfg.leafClick || null;
+        for (var i in cfg) {
+            this[i] = cfg[i];
+        }
     }
 
     tree.prototype.render = function (data) {
