@@ -11,7 +11,7 @@ jex.define('main', {
     },
     items: [
         {
-            title: '精选',
+            title: 'main',
             items: [
                 {
                     alias: 'index'
@@ -27,7 +27,7 @@ jex.define('main', {
             ]
         },
         {
-            title: '出版',
+            title: 'list',
             items: [
                 {
                     alias: 'history'
@@ -36,7 +36,7 @@ jex.define('main', {
 
         },
         {
-            title: '男生',
+            title: 'form',
             items: [
                 {
                     alias: 'profile'
@@ -45,7 +45,7 @@ jex.define('main', {
 
         },
         {
-            title: '女生',
+            title: 'form2',
             items: [
                 {
                     alias: 'profile'

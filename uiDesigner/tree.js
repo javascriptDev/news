@@ -193,8 +193,7 @@
         a.setAttribute('data-name', name);
         return a;
     };
-    var c = document.createElement('div');
-    c.className = 'j-tree';
+
     function digui(parent, items, type) {
         Array.prototype.forEach.call(items, function (leaf) {
             if (!leaf.items) {
@@ -212,7 +211,9 @@
     }
 
     var tree = function (cfg) {
-        this.data = data;
+        var c = document.createElement('div');
+        c.className = 'j-tree';
+        this.data = cfg.data || data;
         this.el = c;
         this.leafClick = cfg.leafClick || null;
         for (var i in cfg) {

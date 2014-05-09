@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var MapA = {};
+
+    //参数设置
+
+    MapA.centerPoint;
+    MapA.map;
+
+    //函数设置
+    //加载百度地图
+    MapA.openMap = function (object) {
+        //去的南京的中心点
+        MapA.map = new BMap.Map("MapA_center_con");
+
+        GeoA.startGeo();
+
+
+        window.setTimeout(function () {   // 元素div可见时才可以加载百度地图。所以延迟一下。
+
+            MapA.map.centerAndZoom(MapA.centerPoint, 18);
+
+        }, 100);
+    };
+
+    GeoA.startGeo = function () {
+        GeoA.geolocation = new BMap.Geolocation();  //实例化浏览器定位对象。
+        GeoA.geolocation.getCurrentPosition(function (r) {   //定位结果对象会传递给r变量
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {  //通过Geolocation类的getStatus()可以判断是否成功定位。
+                MapA.centerPoint = r.point;
+                alert('您的位置：' + r.point.lng + ',' + r.point.lat);  //r对象的point属性也是一个对象，这个对象的lng属性表示经度，lat属性表示纬度。
+            }
+            else {
+                alert('failed' + this.getStatus());
+                MapA.ipStatus = 0;
+                MapA.centerPoint = new BMap.Point(118.778074, 32.057236);
+            }
+        }, {enableHighAccuracy: true});
+
+        alert('value of MapA.centerPoint:' + MapA.centerPoint);
+    };
+
+</script>
+
+</body>
+</html>

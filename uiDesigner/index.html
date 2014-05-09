@@ -67,13 +67,14 @@
     }
     var left = $('.type-list');
     var right = $('.main');
+    var prop = $('.property');
     //根据浏览器大小设置 主内容高度
     right.style.height = window.innerHeight - 150 + 'px';
 
     //生成树
     var tree = new Tree({
         dragStart: function (e) {
-            e.dataTransfer.setData("Text", e.target.dataset['name']);
+            e.dataTransfer.setData("name", e.target.dataset['name']);
             e.dataTransfer.setData("id", e.target.id);
         }
     });
@@ -82,11 +83,43 @@
     left.appendChild(dom);
     document.querySelector('.main').ondrop = function (e) {
         e.preventDefault();
-        var data = e.dataTransfer.getData("Text");
-        var com = jex.create(data, {text: 'asdd', label: 'name'});
+        var data = e.dataTransfer.getData("name");
+        var com = jex.create(data);
         com.beforeRender();
         e.target.appendChild(com.element);
+        com.element.onclick = function (e) {
+            var a = new Tree({
+                data: [
+                    {
+                        node: 'style',
+                        items: [
+                            {
+                                name: 'background'
+                            },
+                            {
+                                name: 'color'
+                            }
+                        ]
+                    },
+                    {
+                        node: 'ui',
+                        items: [
+                            {
+                                name: 'text'
+                            },
+                            {
+                                name: 'alias'
+                            }
+                        ]
+                    }
+                ]
+            }).render()
+            prop.appendChild(a
+            );
+        }
+
     }
+
     document.querySelector('.main').ondragover = function (e) {
         e.preventDefault();
     }
