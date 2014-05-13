@@ -176,6 +176,7 @@
         return a;
     };
     var leafDom = function (name, type) {
+
         var a = document.createElement('div');
         a.className = 'leaf-dom';
         a.innerText = name;
@@ -183,7 +184,14 @@
         a.setAttribute('data-type', type);
         a.setAttribute('data-name', name);
         a.setAttribute('draggable', true);
-        return a;
+
+        return {
+            add: function (dom) {
+                a.appendChild(dom);
+                return this;
+            },
+            dom: a
+        }
     };
     var middleDom = function (name, type) {
         var a = document.createElement('div');
@@ -193,18 +201,41 @@
         a.setAttribute('data-name', name);
         return a;
     };
+    var createInput = function (id) {
+        var i = document.createElement('input');
+        i.type = 'text';
+        i.className = 'in_val ' + id;
+        return i;
+    }
 
     function digui(parent, items, type) {
         Array.prototype.forEach.call(items, function (leaf) {
             if (!leaf.items) {
-                parent.appendChild(leafDom(leaf.name, type));
+                var el;
+                if (leaf.ctype) {
+                    var inner;
+                    switch (leaf.ctype) {
+                        case 'input':
+                            inner = createInput(leaf.name);
+                            break;
+                        default:
+                            return;
+                            break;
+                    }
+                    el = leafDom(leaf.name, type).add(inner).dom;
+
+                } else {
+                    el = leafDom(leaf.name, type).dom;
+                }
+
+                parent.appendChild(el);
+
             } else {
                 var c = document.createElement('div');
                 c.className = 'leaf-container';
                 var node = middleDom(leaf.name, type);
                 parent.appendChild(node);
                 parent.appendChild(c);
-
                 digui(c, leaf.items, leaf.name);
             }
         });
@@ -220,7 +251,6 @@
             this[i] = cfg[i];
         }
     }
-
     tree.prototype.render = function (data) {
         var me = this, el = [];
         Array.prototype.forEach.call(data || this.data, function (item, index) {

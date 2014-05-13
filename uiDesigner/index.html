@@ -88,16 +88,19 @@
         com.beforeRender();
         e.target.appendChild(com.element);
         com.element.onclick = function (e) {
+            prop.innerHTML = '';
             var a = new Tree({
                 data: [
                     {
                         node: 'style',
                         items: [
                             {
-                                name: 'background'
+                                name: 'background',
+                                ctype: 'input'
                             },
                             {
-                                name: 'color'
+                                name: 'color',
+                                ctype: 'input'
                             }
                         ]
                     },
@@ -105,21 +108,21 @@
                         node: 'ui',
                         items: [
                             {
-                                name: 'text'
+                                name: 'text',
+                                ctype: 'input'
                             },
                             {
-                                name: 'alias'
+                                name: 'alias',
+                                ctype: 'input'
                             }
                         ]
                     }
                 ]
             }).render()
-            prop.appendChild(a
-            );
+            prop.appendChild(a);
         }
 
     }
-
     document.querySelector('.main').ondragover = function (e) {
         e.preventDefault();
     }
