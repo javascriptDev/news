@@ -28,6 +28,8 @@ var arr = [
         form + 'form.js', form + 'text.js', form + 'password.js', form + 'radio.js',
     //model
         model + 'model.js',
+    //scroller
+        root + 'scroller.js',
     //controller
         ctl + 'controller.js',
     //store
