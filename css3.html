@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .b {
+            width: 200px;
+            height: 200px;
+            background: hotpink;
+            color: white;
+            font: 15px bold;
+            position: relative;
+        }
+
+        .b:before {
+            pointer-events: none;
+            position: absolute;
+            content: '';
+            height: 100%;
+            width: 100%;
+            background: red;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transform: skewX(10deg) rotateY(90deg);
+            -webkit-transition-property: width transform;
+            transition-property: width transform opacity;
+
+        }
+
+        .b:hover:before {
+            -webkit-transform: rotateY(0deg);
+            background: red;
+            opacity: .5;;
+
+        }
+    </style>
+</head>
+<body>
+<div class="b">asdasdasdasda</div>
+</body>
+</html>
